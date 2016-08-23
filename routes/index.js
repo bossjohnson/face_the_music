@@ -1,10 +1,28 @@
-const express = require('express');
-const router = express.Router();
+var express = require('express');
+var router = express.Router();
+var https = require('https');
+var cloudinary = require('cloudinary');
 require('dotenv').config();
-const https = require('https');
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+});
+
+
 router.get('/', function(req, res, next) {
     res.sendStatus(200);
 });
+
+// Route for uploading images to cloudinary
+router.post('/upload', function(req, res, next) {
+    cloudinary.uploader.upload('URL of image', function(result) {
+        console.log(result);
+    })
+    res.sendStatus(200);
+});
+
+// Test route for hitting face API
 router.get('/test', function(req, res, next) {
     console.log('hit route');
     // var apiBaseUrl = 'https://api.projectoxford.ai/face/v1.0/detect';
