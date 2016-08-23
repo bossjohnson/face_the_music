@@ -2,7 +2,11 @@ var express = require('express');
 var router = express.Router();
 var https = require('https');
 var cloudinary = require('cloudinary');
-require('dotenv').config();
+
+// Pull in environment variables
+require('dotenv').config(); // NOTE: delete or comment out for Heroku deploy
+
+// Configure cloudinary
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
@@ -23,9 +27,9 @@ router.post('/upload', function(req, res, next) {
 });
 
 // Test route for hitting face API
-router.get('/test', function(req, res, next) {
-    console.log('hit route');
-    // var apiBaseUrl = 'https://api.projectoxford.ai/face/v1.0/detect';
+router.post('/test', function(req, res, next) {
+    console.log(req.body);
+    var apiBaseUrl = 'https://api.projectoxford.ai/face/v1.0/detect';
     var hostName = 'api.projectoxford.ai';
     var queryParams = '?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=age,gender,facialHair,glasses';
     var faceUrl = 'http://nerdist.com/wp-content/uploads/2015/02/DavidLynch-970x545.jpg';
@@ -39,8 +43,6 @@ router.get('/test', function(req, res, next) {
             'Ocp-Apim-Subscription-Key': process.env.FACE_API_KEY
         }
     };
-
-    // console.log(options);
 
     var request = https.request(options, function(response) {
         var finished = '';
