@@ -2,16 +2,35 @@ var express = require('express');
 var router = express.Router();
 require('dotenv').config();
 var https = require('https');
+// var multer = require('multer');
+var formidable = require('formidable');
+
 
 router.get('/', function(req, res, next) {
     res.sendStatus(200);
 });
 
-router.post('/what', function(req, res, next) {
-    console.log('hit route');
-    console.log(req.body);
-    res.sendStatus(200);
-})
+// router.post('/upload', multer().single('file'), function(req, res, next){
+//     console.log('uploading...');
+//     console.log(req.file);
+//     res.sendStatus(200);
+// });
+
+router.post('/upload', function(req, res, next){
+  console.log('preparing to parse form...');
+  var form = new formidable.IncomingForm();
+  console.log("FORM:::", form);
+  form.parse(req, function (err, fields, files) {
+      if (err) {
+        console.error(err);
+      }
+      console.log('fields:', fields);
+      console.log('files:', files);
+      res.send(files.file);
+  });
+
+
+});
 
 router.post('/test', function(req, res, next) {
     console.log(req.body);

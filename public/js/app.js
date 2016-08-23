@@ -1,1 +1,1 @@
-var app = angular.module('faceTheMusicApp', []);
+var app = angular.module('faceTheMusicApp', ['ngFileUpload']);

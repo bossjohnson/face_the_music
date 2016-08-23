@@ -10,6 +10,9 @@
     "body-parser": "^1.15.2",
     "cloudinary-jquery-file-upload": "^2.1.2",
     "express": "~4.13.1",
-    "jquery": "^3.1.0"
+    "formidable": "^1.0.17",
+    "jquery": "^3.1.0",
+    "multer": "^1.2.0",
+    "ng-file-upload": "^12.0.4"
   }
 }
