@@ -4067,4 +4067,5 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
     CloudinaryJQuery: CloudinaryJQuery
   };
   return cloudinary;
+  $.cloudinary.config({ cloud_name: 'face-the-music', api_key: '177469316327667'});
 });
