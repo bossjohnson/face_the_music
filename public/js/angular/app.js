@@ -1,5 +1,5 @@
-var app = angular.module('faceTheMusicApp', ['ngFileUpload', 'ngRoute', 'cloudinaryProvider']);
-app.config(function($routeProvider, cloudinaryProvider) {
+var app = angular.module('faceTheMusicApp', ['ngFileUpload', 'ngRoute']);
+app.config(function($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'partials/upload.html',
@@ -8,7 +8,4 @@ app.config(function($routeProvider, cloudinaryProvider) {
         .otherwise({
             redirectTo: '/'
         });
-    cloudinaryProvider
-        .set("cloud_name", "face-the-music")
-        .set("upload_preset", "dmrrvkjc");
 });

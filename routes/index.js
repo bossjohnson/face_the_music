@@ -20,7 +20,8 @@ router.get('/', function(req, res, next) {
 
 // Route for uploading images to cloudinary
 router.post('/upload', function(req, res, next) {
-    cloudinary.uploader.upload('URL of image', function(result) {
+    var imageUrl = 'https://hardtickettohomevideo.files.wordpress.com/2013/07/cage-face-3.jpg';
+    cloudinary.uploader.upload(imageUrl, function(result) { // TODO: figure out image URL -- or how to use binary image files
         console.log(result);
     })
     res.sendStatus(200);
