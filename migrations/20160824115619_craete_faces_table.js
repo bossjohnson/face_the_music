@@ -2,12 +2,12 @@ exports.up = function(knex, Promise) {
     return knex.schema.createTable('faces', function(table) {
         table.increments();
         table.string('url');
-        table.decimal('smile', 2);
+        table.decimal('smile');
         table.string('gender');
-        table.decimal('age', 3);
-        table.decimal('moustache', 2);
-        table.decimal('beard', 2);
-        table.decimal('sideburns', 2);
+        table.decimal('age');
+        table.decimal('moustache');
+        table.decimal('beard');
+        table.decimal('sideburns');
         table.string('glasses');
     });
 };
