@@ -26,8 +26,11 @@ router.get('/', function(req, res, next) {
 // Route for uploading images to cloudinary
 router.post('/upload', upload.single('file'), function(req, res, next) {
     var imageFile = req.file;
-    console.log(imageFile);
-    cloudinary.uploader.upload(imageFile.path, function(result) {
+    var upStream = cloudinary.uploader.upload(imageFile.path, function(result) {
+        fs.unlink(imageFile.path, (err) => {
+            if (err) console.error(err);
+        });
+        console.log(result);
         res.send(result);
     });
 });
