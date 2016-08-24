@@ -1,5 +1,9 @@
 <form class="uploadForm">
+    <input type="file"
+        ngf-select
+        name="file"
+        ng-model="upload.file">
     <button type="button"
         name="uploadPhoto"
-        ng-click="uploadPhoto()">Upload Photo</button>
+        ng-click="uploadPhoto(upload.file)">Upload Photo</button>
 </form>

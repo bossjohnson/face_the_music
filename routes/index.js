@@ -2,6 +2,11 @@ var express = require('express');
 var router = express.Router();
 var https = require('https');
 var cloudinary = require('cloudinary');
+var multer = require('multer');
+var upload = multer({
+    dest: 'uploads/'
+});
+var fs = require('fs');
 
 // Pull in environment variables
 require('dotenv').config(); // NOTE: delete or comment out for Heroku deploy
@@ -19,12 +24,12 @@ router.get('/', function(req, res, next) {
 });
 
 // Route for uploading images to cloudinary
-router.post('/upload', function(req, res, next) {
-    var imageUrl = 'https://hardtickettohomevideo.files.wordpress.com/2013/07/cage-face-3.jpg';
-    cloudinary.uploader.upload(imageUrl, function(result) { // TODO: figure out image URL -- or how to use binary image files
-        console.log(result);
-    })
-    res.sendStatus(200);
+router.post('/upload', upload.single('file'), function(req, res, next) {
+    var imageFile = req.file;
+    console.log(imageFile);
+    cloudinary.uploader.upload(imageFile.path, function(result) {
+        res.send(result);
+    });
 });
 
 // Test route for hitting face API
