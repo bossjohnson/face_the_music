@@ -34,10 +34,8 @@ router.post('/upload', upload.single('file'), function(req, res, next) {
         fs.unlink(imageFile.path, (err) => {
             if (err) console.error(err);
         });
-        // console.log("result:::", result.url);
 
-        // hit face api
-
+        // hit face api with data from cloudinary upload
         var hostName = 'api.projectoxford.ai';
         var queryParams = '?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=age,gender,facialHair,glasses,smile';
         var faceUrl = result.url;
@@ -59,9 +57,13 @@ router.post('/upload', upload.single('file'), function(req, res, next) {
             });
             response.on('end', function() {
                 res.send(finished);
-
+                console.log("FINISHED DATA:::", finished);
                 // TODO: put "finished" data into DB
                 var faceData = JSON.parse(finished)[0];
+                if (!faceData) {
+                    console.log('NO FACE DETECTED');
+                    return;
+                }
                 knex('faces')
                     .insert({
                         url: faceUrl,
@@ -73,10 +75,10 @@ router.post('/upload', upload.single('file'), function(req, res, next) {
                         sideburns: faceData.faceAttributes.facialHair.sideburns,
                         glasses: faceData.faceAttributes.glasses
                     })
-                    .then(function(data) {
-                        console.log("FINISHED DB INSERT:::", data);
-                    })
-            })
+                    .then(() => {
+                        console.log("INSERT SUCCESSFUL");
+                    });
+            });
         });
 
         request.on('error', function(error) {
