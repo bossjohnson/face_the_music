@@ -6,6 +6,9 @@ var multer = require('multer');
 var upload = multer({
     dest: 'uploads/'
 });
+require('dotenv').config();
+var knexConfig = require('../knexfile')[process.env.NODE_ENV];
+var knex = require('knex')(knexConfig);
 var fs = require('fs');
 
 // Pull in environment variables
