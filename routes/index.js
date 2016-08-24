@@ -57,8 +57,7 @@ router.post('/upload', upload.single('file'), function(req, res, next) {
             });
             response.on('end', function() {
                 res.send(finished);
-                console.log("FINISHED DATA:::", finished);
-                // TODO: put "finished" data into DB
+
                 var faceData = JSON.parse(finished)[0];
                 if (!faceData) {
                     console.log('NO FACE DETECTED');
