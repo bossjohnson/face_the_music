@@ -1,16 +1,5 @@
-// app.controller('testController', testController);
-// testController.$inject = ['$scope', '$http'];
-
 app.controller('uploadCtrl', uploadCtrl);
 uploadCtrl.$inject = ['$scope', '$http', 'Upload'];
-
-
-// function testController($scope, $http) {
-//     $scope.view = {};
-//     $scope.uploadImage = function() {
-//         console.log('uploading image...');
-//     }
-// }
 
 function uploadCtrl($scope, $http, Upload) {
     $scope.upload = {};
