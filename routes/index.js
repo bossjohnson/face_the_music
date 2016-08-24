@@ -30,7 +30,7 @@ router.post('/upload', upload.single('file'), function(req, res, next) {
         fs.unlink(imageFile.path, (err) => {
             if (err) console.error(err);
         });
-        console.log(result);
+        console.log(result.data.url);
         res.send(result);
     });
 });
