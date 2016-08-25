@@ -12,6 +12,8 @@
     <!-- CDN Dependencies -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
     </script>
 
@@ -30,11 +32,17 @@
 
     <header>
         <h1 class="ftmLogo">Face the Music</h1>
+        <nav>
+            <a href="#/upload"
+                class="fa fa-upload">&nbsp;Upload a Face</a>
+            <a href="#/faces"
+                class="fa fa-music">&nbsp;Play Faces</a>
+        </nav>
     </header>
 
-       <main ng-view>
+    <main ng-view>
 
-       </main>
+    </main>
 
 </body>
 

@@ -18,8 +18,9 @@ body {
 }
 header {
     text-align: center;
-    height: 10%;
+    height: 15%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 2em;
@@ -27,6 +28,24 @@ header {
     margin-bottom: 1%;
     background-image: linear-gradient(170deg, gainsboro, slategray);
     text-shadow: 0 5px 6px rgba(0, 0, 0, .7);
+    nav {
+        display: flex;
+        justify-content: space-around;
+        font-size: .5em;
+        a {
+          border: 2px outset gray;
+          border-radius: 8px;
+          color: black;
+          text-decoration: none;
+          text-shadow: none;
+          padding: 5%;
+          margin: 1%;
+          white-space: nowrap;
+          &:hover {
+            text-shadow: 0 2px 3px rgba(0, 0, 0, .7);
+          }
+        }
+    }
     .ftmLogo {
         font-family: 'LD Music', sans-serif;
     }
@@ -72,4 +91,5 @@ main {
 }
 .previewImg {
     max-height: 300px;
+    border-radius: 8px;
 }
