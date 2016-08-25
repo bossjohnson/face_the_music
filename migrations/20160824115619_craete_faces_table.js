@@ -9,6 +9,7 @@ exports.up = function(knex, Promise) {
         table.decimal('beard');
         table.decimal('sideburns');
         table.string('glasses');
+        
     });
 };
 

@@ -2,10 +2,15 @@
     font-family: 'LD Music';
     src: url("../fonts/Ldmusic.ttf");
 }
+@font-face {
+    font-family: 'Roboto';
+    src: url("../fonts/Roboto-Black.ttf");
+}
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 body {
     width: 100vw;
@@ -13,24 +18,54 @@ body {
 }
 header {
     text-align: center;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    border-bottom: 5px outset whitesmoke;
+    margin-bottom: 1%;
+    background-color: gainsboro;
+    text-shadow: 0 5px 6px rgba(0, 0, 0, .7);
     .ftmLogo {
         font-family: 'LD Music', sans-serif;
     }
 }
-.uploadForm {
-    border: 5px outset gray;
-    border-radius: 5px;
+main {
+    // border: 2px dotted black;
     display: flex;
     flex-direction: column;
     align-items: center;
-    .selectUpload {
-        &:hover {
-            cursor: pointer;
+    .uploadForm {
+        border: 5px outset gray;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1%;
+        background-color: ghostwhite;
+        button {
+            padding: 1%;
+            border: 2px outset silver;
+            border-radius: 5px;
+            background-color: palegreen;
+            &:hover {
+                background-color: lightgreen;
+                cursor: pointer;
+            }
         }
-    }
-    .submitUpload {
-        &:hover {
-            cursor: pointer;
+        .selectUpload {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .submitUpload {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        * {
+          margin: 3  %;
         }
     }
 }
