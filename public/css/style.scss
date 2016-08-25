@@ -23,17 +23,15 @@ header {
     justify-content: center;
     align-items: center;
     font-size: 2em;
-    border-bottom: 5px outset whitesmoke;
+    border-bottom: 2px outset whitesmoke;
     margin-bottom: 1%;
-    // background-color: gainsboro;
-    background-image: linear-gradient(135deg, gainsboro, slategray);
+    background-image: linear-gradient(170deg, gainsboro, slategray);
     text-shadow: 0 5px 6px rgba(0, 0, 0, .7);
     .ftmLogo {
         font-family: 'LD Music', sans-serif;
     }
 }
 main {
-    // border: 2px dotted black;
     display: flex;
     flex-direction: column;
     align-items: center;

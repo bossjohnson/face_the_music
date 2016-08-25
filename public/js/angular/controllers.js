@@ -12,8 +12,8 @@ function uploadCtrl($scope, $http, Upload) {
             }
         }).then(function(data) {
             $scope.upload.faceData = data.data.faceData;
-            console.log($scope.upload.faceData);
             $scope.upload.url = data.data.faceUrl;
+            console.log($scope.upload.faceData);
         });
     }
 }

@@ -11,15 +11,3 @@
     class="previewImg"
     alt="FACE"
     ng-if="upload.url">
-<div ng-repeat="(key, value) in upload.faceData track by $index">
-    <h2 ng-if="value">VALUE ::: {{ key }} : {{ value }}</h2>
-    <h2 ng-if="!value">NOOOO VALUE ::: {{ key }}</h2>
-
-    <div ng-repeat="(subKey, subValue) in value track by $index">
-        <h3>{{ subKey }} : {{ subValue }}</h3>
-        <div ng-repeat="(subSubKey, subSubValue) in subValue track by $index">
-            <h4>{{ subSubKey }} : {{ subSubValue }}</h4>
-        </div>
-    </div>
-
-</div>
