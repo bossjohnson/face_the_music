@@ -31,19 +31,19 @@ header {
     nav {
         display: flex;
         justify-content: space-around;
-        font-size: .5em;
+        font-size: 0.5em;
         a {
-          border: 2px outset gray;
-          border-radius: 8px;
-          color: black;
-          text-decoration: none;
-          text-shadow: none;
-          padding: 5%;
-          margin: 1%;
-          white-space: nowrap;
-          &:hover {
-            text-shadow: 0 2px 3px rgba(0, 0, 0, .7);
-          }
+            border: 2px outset gray;
+            border-radius: 8px;
+            color: black;
+            text-decoration: none;
+            text-shadow: none;
+            padding: 5%;
+            margin: 1%;
+            white-space: nowrap;
+            &:hover {
+                text-shadow: 0 2px 3px rgba(0, 0, 0, .7);
+            }
         }
     }
     .ftmLogo {
@@ -94,8 +94,16 @@ main {
     border-radius: 8px;
 }
 .faceContainer {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+[musical-face] {
+    img {
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0 5px 3px rgba(0,0,0,.7);
+        }
+    }
 }

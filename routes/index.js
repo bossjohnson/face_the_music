@@ -163,10 +163,8 @@ router.get('/faces/all', function(req, res, next) {
 router.get('/faces/:id', function(req, res, next) {
     knex('faces').where('id', req.params.id)
         .then(function(data) {
-            console.log(data);
             res.send(data);
-        })
-        // res.send("OK");
+        });
 });
 
 module.exports = router;
