@@ -78,4 +78,10 @@ main {
   max-height: 300px;
   border-radius: 8px; }
 
+.faceContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; }
+
 /*# sourceMappingURL=style.css.map */
