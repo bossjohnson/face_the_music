@@ -1,3 +1,6 @@
+@font-face {
+  font-family: 'LD Music';
+  src: url("../fonts/Ldmusic.ttf"); }
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,11 +10,21 @@ body {
   width: 100vw;
   height: 100vh; }
 
-.selectUpload:hover {
-  cursor: pointer; }
+header {
+  text-align: center; }
+  header .ftmLogo {
+    font-family: 'LD Music', sans-serif; }
 
-.submitUpload:hover {
-  cursor: pointer; }
+.uploadForm {
+  border: 5px outset gray;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .uploadForm .selectUpload:hover {
+    cursor: pointer; }
+  .uploadForm .submitUpload:hover {
+    cursor: pointer; }
 
 .previewImg {
   max-height: 300px; }
