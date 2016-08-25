@@ -3,8 +3,8 @@ app.directive('musicalFace', function() {
         templateUrl: '../partials/face.html',
         restrict: 'A',
         scope: {
-            face: '='
+            faceId: '='
         },
-        controller: faceController
+        controller: faceCtrl
     };
 });

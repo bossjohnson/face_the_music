@@ -20,11 +20,11 @@ cloudinary.config({
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET
 });
-
-
-router.get('/', function(req, res, next) {
-    res.sendStatus(200);
-});
+//
+//
+// router.get('/', function(req, res, next) {
+//     res.sendStatus(200);
+// });
 
 // Route for uploading images to cloudinary
 router.post('/upload', upload.single('file'), function(req, res, next) {
@@ -146,6 +146,23 @@ router.post('/upload', upload.single('file'), function(req, res, next) {
         }));
         request.end();
     });
+});
+
+router.get('/faces/all', function(req, res, next) {
+    knex('faces')
+        .select('id')
+        .then(function(data) {
+            res.send(data);
+        });
+});
+
+router.get('/faces/:id', function(req, res, next) {
+    knex('faces').where('id', req.params.id)
+        .then(function(data) {
+            console.log(data);
+            res.send(data);
+        })
+        // res.send("OK");
 });
 
 module.exports = router;

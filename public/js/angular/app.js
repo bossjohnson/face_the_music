@@ -11,7 +11,7 @@ app.config(function($routeProvider) {
         })
         .when('/faces', {
             templateUrl: 'partials/allFaces.html',
-            controller: 'faceCtrl'
+            controller: 'dataFetchCtrl'
         })
         .otherwise({
             redirectTo: '/'
