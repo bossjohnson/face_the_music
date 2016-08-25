@@ -13,7 +13,6 @@ function uploadCtrl($scope, $http, Upload) {
         }).then(function(data) {
             $scope.upload.faceData = data.data.faceData;
             $scope.upload.url = data.data.faceUrl;
-            console.log($scope.upload.faceData);
         });
     }
 }
@@ -136,7 +135,6 @@ function faceCtrl($scope, $timeout, $http) {
             generateTone(200);
 
             function generateTone(duration) {
-                console.log($scope);
                 // Create oscillator
                 var osc = audioContext.createOscillator();
                 osc.frequency.value = mouthWidth * age / 16;

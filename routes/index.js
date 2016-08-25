@@ -130,7 +130,11 @@ router.post('/upload', upload.single('file'), function(req, res, next) {
                         underLipTopX: faceData.faceLandmarks.underLipTop.x,
                         underLipTopY: faceData.faceLandmarks.underLipTop.y,
                         underLipBottomX: faceData.faceLandmarks.underLipBottom.x,
-                        underLipBottomY: faceData.faceLandmarks.underLipBottom.y
+                        underLipBottomY: faceData.faceLandmarks.underLipBottom.y,
+                        faceRectangleTop: faceData.faceRectangle.top,
+                        faceRectangleLeft: faceData.faceRectangle.left,
+                        faceRectangleWidth: faceData.faceRectangle.width,
+                        faceRectangleHeight: faceData.faceRectangle.height
                     })
                     .then(() => {
                         console.log("INSERT SUCCESSFUL");
