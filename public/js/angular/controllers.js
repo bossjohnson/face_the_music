@@ -11,7 +11,9 @@ function uploadCtrl($scope, $http, Upload) {
                 file: photo
             }
         }).then(function(data) {
-            console.log(data);
+            $scope.upload.faceData = data.data.faceData;
+            console.log($scope.upload.faceData);
+            $scope.upload.url = data.data.faceUrl;
         });
     }
 }

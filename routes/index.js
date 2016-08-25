@@ -56,9 +56,13 @@ router.post('/upload', upload.single('file'), function(req, res, next) {
                 finished += data.toString();
             });
             response.on('end', function() {
-                res.send(finished);
+                res.send({
+                    faceUrl: faceUrl,
+                    faceData: JSON.parse(finished)[0]
+                });
 
                 var faceData = JSON.parse(finished)[0];
+
                 if (!faceData) {
                     console.log('NO FACE DETECTED');
                     return;
