@@ -1,75 +1,61 @@
-/*
-Error: Invalid CSS after "...   margin: 3  %": expected expression (e.g. 1px, bold), was ";"
-        on line 68 of style.scss
+@font-face {
+  font-family: 'LD Music';
+  src: url("../fonts/Ldmusic.ttf"); }
+@font-face {
+  font-family: 'Roboto';
+  src: url("../fonts/Roboto-Black.ttf"); }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif; }
 
-63:             &:hover {
-64:                 cursor: pointer;
-65:             }
-66:         }
-67:         * {
-68:           margin: 3  %;
-69:         }
-70:     }
-71: }
-72: .previewImg {
-73:     max-height: 300px;
+body {
+  width: 100vw;
+  height: 100vh; }
 
-Backtrace:
-style.scss:68
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1189:in `expected'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/script/lexer.rb:229:in `expected!'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/script/parser.rb:704:in `assert_expr'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/script/parser.rb:298:in `times_div_or_mod'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/script/parser.rb:286:in `plus_or_minus'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/script/parser.rb:286:in `relational'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/script/parser.rb:286:in `eq_or_neq'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/script/parser.rb:286:in `and_expr'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/script/parser.rb:286:in `or_expr'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/script/parser.rb:488:in `space'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/script/parser.rb:434:in `interpolation'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/script/parser.rb:359:in `expr'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/script/parser.rb:702:in `assert_expr'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/script/parser.rb:75:in `parse'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1051:in `sass_script'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:897:in `value!'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:769:in `block in try_declaration'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1165:in `call'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1165:in `rethrow'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:782:in `try_declaration'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:711:in `declaration_or_ruleset'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:676:in `block_child'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:665:in `block_contents'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:657:in `block'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:726:in `declaration_or_ruleset'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:676:in `block_child'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:668:in `block_contents'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:657:in `block'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:726:in `declaration_or_ruleset'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:676:in `block_child'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:668:in `block_contents'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:657:in `block'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:649:in `ruleset'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:675:in `block_child'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:668:in `block_contents'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:125:in `stylesheet'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:41:in `parse'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:406:in `_to_tree'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:381:in `_render_with_sourcemap'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:298:in `render_with_sourcemap'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `each'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:473:in `on_file_changed'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:331:in `block in watch'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/listener.rb:252:in `call'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/listener.rb:252:in `on_change'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/listener.rb:290:in `block in initialize_adapter'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/adapters/polling.rb:48:in `call'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/adapters/polling.rb:48:in `poll_changed_directories'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/adapter.rb:299:in `block in start_poller'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Invalid CSS after \"...   margin: 3  %\": expected expression (e.g. 1px, bold), was \";\"\A         on line 68 of style.scss\A \A 63:             &:hover {\A 64:                 cursor: pointer;\A 65:             }\A 66:         }\A 67:         * {\A 68:           margin: 3  %;\A 69:         }\A 70:     }\A 71: }\A 72: .previewImg {\A 73:     max-height: 300px;"; }
+header {
+  text-align: center;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  border-bottom: 5px outset whitesmoke;
+  margin-bottom: 1%;
+  background-color: gainsboro;
+  text-shadow: 0 5px 6px rgba(0, 0, 0, 0.7); }
+  header .ftmLogo {
+    font-family: 'LD Music', sans-serif; }
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  main .uploadForm {
+    border: 5px outset gray;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1%;
+    background-color: ghostwhite; }
+    main .uploadForm button {
+      padding: 1%;
+      border: 2px outset silver;
+      border-radius: 5px;
+      background-color: palegreen; }
+      main .uploadForm button:hover {
+        background-color: lightgreen;
+        cursor: pointer; }
+    main .uploadForm .selectUpload:hover {
+      cursor: pointer; }
+    main .uploadForm .submitUpload:hover {
+      cursor: pointer; }
+    main .uploadForm * {
+      margin: 3%; }
+
+.previewImg {
+  max-height: 300px; }
+
+/*# sourceMappingURL=style.css.map */
