@@ -33,6 +33,7 @@ header {
     header nav a {
       border: 2px outset gray;
       border-radius: 8px;
+      background-color: whitesmoke;
       color: black;
       text-decoration: none;
       text-shadow: none;
@@ -84,8 +85,13 @@ main {
   flex-wrap: wrap;
   justify-content: space-around; }
 
-[musical-face] img:hover {
-  cursor: pointer;
-  box-shadow: 0 5px 3px rgba(0, 0, 0, 0.7); }
+[musical-face] {
+  position: relative; }
+  [musical-face] img {
+    box-shadow: 2px 5px 3px rgba(0, 0, 0, 0.5); }
+    [musical-face] img:hover {
+      position: relative;
+      top: -5px;
+      cursor: pointer; }
 
 /*# sourceMappingURL=style.css.map */

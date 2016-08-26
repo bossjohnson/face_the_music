@@ -70,6 +70,9 @@ exports.up = function(knex, Promise) {
         table.decimal('faceRectangleLeft');
         table.decimal('faceRectangleWidth');
         table.decimal('faceRectangleHeight');
+        // Original Dimensions
+        table.decimal('originalHeight');
+        table.decimal('originalWidth');
     });
 };
 

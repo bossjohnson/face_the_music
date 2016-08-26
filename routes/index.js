@@ -20,11 +20,6 @@ cloudinary.config({
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET
 });
-//
-//
-// router.get('/', function(req, res, next) {
-//     res.sendStatus(200);
-// });
 
 // Route for uploading images to cloudinary
 router.post('/upload', upload.single('file'), function(req, res, next) {
@@ -56,12 +51,11 @@ router.post('/upload', upload.single('file'), function(req, res, next) {
                 finished += data.toString();
             });
             response.on('end', function() {
+                var faceData = JSON.parse(finished)[0];
                 res.send({
                     faceUrl: faceUrl,
-                    faceData: JSON.parse(finished)[0]
+                    faceData: faceData
                 });
-
-                var faceData = JSON.parse(finished)[0];
 
                 if (!faceData) {
                     console.log('NO FACE DETECTED');
@@ -134,7 +128,9 @@ router.post('/upload', upload.single('file'), function(req, res, next) {
                         faceRectangleTop: faceData.faceRectangle.top,
                         faceRectangleLeft: faceData.faceRectangle.left,
                         faceRectangleWidth: faceData.faceRectangle.width,
-                        faceRectangleHeight: faceData.faceRectangle.height
+                        faceRectangleHeight: faceData.faceRectangle.height,
+                        originalHeight: result.height,
+                        originalWidth: result.width
                     })
                     .then(() => {
                         console.log("INSERT SUCCESSFUL");

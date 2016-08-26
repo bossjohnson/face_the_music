@@ -1,5 +1,10 @@
 app.controller('uploadCtrl', uploadCtrl);
+app.controller('dataFetchCtrl', dataFetchCtrl);
+app.controller('faceCtrl', faceCtrl);
+
 uploadCtrl.$inject = ['$scope', '$http', 'Upload'];
+dataFetchCtrl.$inject = ['$scope', '$http'];
+faceCtrl.$inject = ['$scope', '$timeout', '$http'];
 
 function uploadCtrl($scope, $http, Upload) {
     $scope.upload = {};
@@ -17,8 +22,6 @@ function uploadCtrl($scope, $http, Upload) {
     }
 }
 
-app.controller('dataFetchCtrl', dataFetchCtrl);
-
 function dataFetchCtrl($scope, $http) {
     $scope.view = {};
     $http.get('/faces/all').then(function(data) {
@@ -27,16 +30,13 @@ function dataFetchCtrl($scope, $http) {
     $scope.audioContext = new window.AudioContext();
     $scope.tuna = new Tuna($scope.audioContext);
 }
-dataFetchCtrl.$inject = ['$scope', '$http'];
-
-app.controller('faceCtrl', faceCtrl);
 
 function faceCtrl($scope, $timeout, $http) {
     $http.get('/faces/' + $scope.faceId).then(function(data) {
         $scope.face = data.data[0];
 
         var face = $scope.face;
-        // console.log(face);
+
         var audioContext = $scope.$parent.audioContext;
         var tuna = $scope.$parent.tuna;
         // LANDMARKS
@@ -159,4 +159,3 @@ function faceCtrl($scope, $timeout, $http) {
         }
     });
 }
-faceCtrl.$inject = ['$scope', '$timeout', '$http'];
