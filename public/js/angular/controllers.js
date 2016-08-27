@@ -3,7 +3,7 @@ app.controller('dataFetchCtrl', dataFetchCtrl);
 app.controller('faceCtrl', faceCtrl);
 
 uploadCtrl.$inject = ['$scope', '$http', 'Upload'];
-dataFetchCtrl.$inject = ['$scope', '$http'];
+dataFetchCtrl.$inject = ['$scope', '$http', '$rootScope'];
 faceCtrl.$inject = ['$scope', '$timeout', '$http'];
 
 function uploadCtrl($scope, $http, Upload) {
@@ -22,13 +22,19 @@ function uploadCtrl($scope, $http, Upload) {
     }
 }
 
-function dataFetchCtrl($scope, $http) {
+function dataFetchCtrl($scope, $http, $rootScope) {
     $scope.view = {};
     $http.get('/faces/all').then(function(data) {
         $scope.view.faceIds = data.data;
     });
     $scope.audioContext = new window.AudioContext();
     $scope.tuna = new Tuna($scope.audioContext);
+
+    $rootScope.imagesHidden = false;
+
+    $rootScope.hideImages = function() {
+        $rootScope.imagesHidden = !$rootScope.imagesHidden;
+    }
 }
 
 function faceCtrl($scope, $timeout, $http) {

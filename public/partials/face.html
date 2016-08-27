@@ -1,4 +1,5 @@
 <img ng-src="{{ face.url }}"
     alt="face"
     class="previewImg"
-    ng-click="play(face)">
+    ng-click="play(face)"
+    ng-class="{hidden: $root.imagesHidden}">

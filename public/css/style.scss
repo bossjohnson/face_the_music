@@ -104,6 +104,11 @@ main {
     position: relative;
     img {
         box-shadow: 2px 5px 3px rgba(0,0,0,.5);
+        opacity: 1;
+        transition: 0.5s;
+        &.hidden {
+            opacity: 0;
+        }
         &:hover {
             position: relative;
             top: -5px;
