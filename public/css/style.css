@@ -98,4 +98,7 @@ main {
       top: -5px;
       cursor: pointer; }
 
+svg {
+  position: absolute; }
+
 /*# sourceMappingURL=style.css.map */
