@@ -45,57 +45,23 @@ function faceCtrl($scope, $timeout, $http) {
 
         var audioContext = $scope.$parent.audioContext;
         var tuna = $scope.$parent.tuna;
-        // LANDMARKS
-        // eyeLeftBottom
-        // eyeLeftInner
-        // eyeLeftOuter
-        // eyeLeftTop
-        // eyeRightBottom
-        // eyeRightInner
-        // eyeRightOuter
-        // eyeRightTop
+
         var eyeSpace = face.eyeRightOuterX - face.eyeLeftOuterX;
 
-        // eyebrowLeftInner
-        // eyebrowLeftOuter
-        // eyebrowRightInner
-        // eyebrowRightOuter
         var eyebrowSpaceY = Math.abs(face.eyebrowRightOuterY - face.eyebrowLeftOuterY);
         var eyebrowSpaceX = Math.abs(face.eyebrowRightOuterX - face.eyebrowLeftOuterX);
 
-
-        // mouthLeft
-        // mouthRight
         var mouthWidth = face.mouthRightX - face.mouthLeftX;
-        // noseLeftAlarOutTip
-        // noseLeftAlarTop
-        // noseRightAlarOutTip
-        // noseRightAlarTop\
+
         var noseAlarWidth = face.noseRightAlarTopX - face.noseLeftAlarTopX;
-        // console.log(noseAlarWidth);
-        // noseRootLeft
-        // noseRootRight
+
         var noseRootWidth = face.noseRootRightX - face.noseRootLeftX;
-        // noseTip
-        // pupilLeft
-        // pupilRight
+
         var pupilSpace = face.pupilRightX - face.pupilLeftX;
-        // underLipBottom
-        // underLipTop
-        // upperLipBottom
-        // upperLipTop
+
         var lipSpace = face.underLipBottomY - face.upperLipTopY;
 
-        // ATTRIBUTES
-        // age
         var age = face.age;
-        // facialHair
-        // beard
-        // moustache
-        // sideburns
-        // gender
-        // glasses
-        // smile
 
         $scope.play = function(face) {
 
