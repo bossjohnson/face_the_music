@@ -16,18 +16,21 @@ app.directive('musicalFace', function() {
                 // Face Rectangle
                 var faceRect = angular.element('<div></div>');
 
+                var faceH = face.faceRectangleHeight;
+                var faceW = face.faceRectangleWidth;
+
                 // Left Eye
-                var svgEyeLeftOuterX = (face.eyeLeftOuterX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgEyeLeftOuterY = (face.eyeLeftOuterY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgEyeLeftOuterX = (face.eyeLeftOuterX - face.faceRectangleLeft) / faceW * 100;
+                var svgEyeLeftOuterY = (face.eyeLeftOuterY - face.faceRectangleTop) / faceH * 100;
 
-                var svgEyeLeftTopX = (face.eyeLeftTopX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgEyeLeftTopY = (face.eyeLeftTopY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgEyeLeftTopX = (face.eyeLeftTopX - face.faceRectangleLeft) / faceW * 100;
+                var svgEyeLeftTopY = (face.eyeLeftTopY - face.faceRectangleTop) / faceH * 100;
 
-                var svgEyeLeftInnerX = (face.eyeLeftInnerX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgEyeLeftInnerY = (face.eyeLeftInnerY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgEyeLeftInnerX = (face.eyeLeftInnerX - face.faceRectangleLeft) / faceW * 100;
+                var svgEyeLeftInnerY = (face.eyeLeftInnerY - face.faceRectangleTop) / faceH * 100;
 
-                var svgEyeLeftBottomX = (face.eyeLeftBottomX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgEyeLeftBottomY = (face.eyeLeftBottomY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgEyeLeftBottomX = (face.eyeLeftBottomX - face.faceRectangleLeft) / faceW * 100;
+                var svgEyeLeftBottomY = (face.eyeLeftBottomY - face.faceRectangleTop) / faceH * 100;
 
                 var leftEye = angular.element(
                     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -41,17 +44,17 @@ app.directive('musicalFace', function() {
                 );
 
                 // Right Eye
-                var svgEyeRightOuterX = (face.eyeRightOuterX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgEyeRightOuterY = (face.eyeRightOuterY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgEyeRightOuterX = (face.eyeRightOuterX - face.faceRectangleLeft) / faceW * 100;
+                var svgEyeRightOuterY = (face.eyeRightOuterY - face.faceRectangleTop) / faceH * 100;
 
-                var svgEyeRightTopX = (face.eyeRightTopX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgEyeRightTopY = (face.eyeRightTopY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgEyeRightTopX = (face.eyeRightTopX - face.faceRectangleLeft) / faceW * 100;
+                var svgEyeRightTopY = (face.eyeRightTopY - face.faceRectangleTop) / faceH * 100;
 
-                var svgEyeRightInnerX = (face.eyeRightInnerX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgEyeRightInnerY = (face.eyeRightInnerY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgEyeRightInnerX = (face.eyeRightInnerX - face.faceRectangleLeft) / faceW * 100;
+                var svgEyeRightInnerY = (face.eyeRightInnerY - face.faceRectangleTop) / faceH * 100;
 
-                var svgEyeRightBottomX = (face.eyeRightBottomX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgEyeRightBottomY = (face.eyeRightBottomY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgEyeRightBottomX = (face.eyeRightBottomX - face.faceRectangleLeft) / faceW * 100;
+                var svgEyeRightBottomY = (face.eyeRightBottomY - face.faceRectangleTop) / faceH * 100;
 
                 var rightEye = angular.element(
                     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -65,23 +68,23 @@ app.directive('musicalFace', function() {
                 );
 
                 // Mouth
-                var svgMouthLeftX = (face.mouthLeftX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgMouthLeftY = (face.mouthLeftY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgMouthLeftX = (face.mouthLeftX - face.faceRectangleLeft) / faceW * 100;
+                var svgMouthLeftY = (face.mouthLeftY - face.faceRectangleTop) / faceH * 100;
 
-                var svgMouthRightX = (face.mouthRightX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgMouthRightY = (face.mouthRightY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgMouthRightX = (face.mouthRightX - face.faceRectangleLeft) / faceW * 100;
+                var svgMouthRightY = (face.mouthRightY - face.faceRectangleTop) / faceH * 100;
 
-                var svgUpperLipTopX = (face.upperLipTopX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgUpperLipTopY = (face.upperLipTopY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgUpperLipTopX = (face.upperLipTopX - face.faceRectangleLeft) / faceW * 100;
+                var svgUpperLipTopY = (face.upperLipTopY - face.faceRectangleTop) / faceH * 100;
 
-                var svgUpperLipBottomX = (face.upperLipBottomX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgUpperLipBottomY = (face.upperLipBottomY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgUpperLipBottomX = (face.upperLipBottomX - face.faceRectangleLeft) / faceW * 100;
+                var svgUpperLipBottomY = (face.upperLipBottomY - face.faceRectangleTop) / faceH * 100;
 
-                var svgUnderLipTopX = (face.underLipTopX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgUnderLipTopY = (face.underLipTopY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgUnderLipTopX = (face.underLipTopX - face.faceRectangleLeft) / faceW * 100;
+                var svgUnderLipTopY = (face.underLipTopY - face.faceRectangleTop) / faceH * 100;
 
-                var svgUnderLipBottomX = (face.underLipBottomX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgUnderLipBottomY = (face.underLipBottomY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgUnderLipBottomX = (face.underLipBottomX - face.faceRectangleLeft) / faceW * 100;
+                var svgUnderLipBottomY = (face.underLipBottomY - face.faceRectangleTop) / faceH * 100;
 
                 var mouth = angular.element(
                     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -99,26 +102,26 @@ app.directive('musicalFace', function() {
                 );
 
                 // Nose
-                var svgNoseRootLeftX = (face.noseRootLeftX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgNoseRootLeftY = (face.noseRootLeftY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgNoseRootLeftX = (face.noseRootLeftX - face.faceRectangleLeft) / faceW * 100;
+                var svgNoseRootLeftY = (face.noseRootLeftY - face.faceRectangleTop) / faceH * 100;
 
-                var svgNoseRootRightX = (face.noseRootRightX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgNoseRootRightY = (face.noseRootRightY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgNoseRootRightX = (face.noseRootRightX - face.faceRectangleLeft) / faceW * 100;
+                var svgNoseRootRightY = (face.noseRootRightY - face.faceRectangleTop) / faceH * 100;
 
-                var svgNoseLeftAlarTopX = (face.noseLeftAlarTopX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgNoseLeftAlarTopY = (face.noseLeftAlarTopY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgNoseLeftAlarTopX = (face.noseLeftAlarTopX - face.faceRectangleLeft) / faceW * 100;
+                var svgNoseLeftAlarTopY = (face.noseLeftAlarTopY - face.faceRectangleTop) / faceH * 100;
 
-                var svgNoseRightAlarTopX = (face.noseRightAlarTopX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgNoseRightAlarTopY = (face.noseRightAlarTopY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgNoseRightAlarTopX = (face.noseRightAlarTopX - face.faceRectangleLeft) / faceW * 100;
+                var svgNoseRightAlarTopY = (face.noseRightAlarTopY - face.faceRectangleTop) / faceH * 100;
 
-                var svgNoseLeftAlarOutTipX = (face.noseLeftAlarOutTipX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgNoseLeftAlarOutTipY = (face.noseLeftAlarOutTipY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgNoseLeftAlarOutTipX = (face.noseLeftAlarOutTipX - face.faceRectangleLeft) / faceW * 100;
+                var svgNoseLeftAlarOutTipY = (face.noseLeftAlarOutTipY - face.faceRectangleTop) / faceH * 100;
 
-                var svgNoseRightAlarOutTipX = (face.noseRightAlarOutTipX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgNoseRightAlarOutTipY = (face.noseRightAlarOutTipY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgNoseRightAlarOutTipX = (face.noseRightAlarOutTipX - face.faceRectangleLeft) / faceW * 100;
+                var svgNoseRightAlarOutTipY = (face.noseRightAlarOutTipY - face.faceRectangleTop) / faceH * 100;
 
-                var svgNoseTipX = (face.noseTipX - face.faceRectangleLeft) / face.faceRectangleWidth * 100;
-                var svgNoseTipY = (face.noseTipY - face.faceRectangleTop) / face.faceRectangleHeight * 100;
+                var svgNoseTipX = (face.noseTipX - face.faceRectangleLeft) / faceW * 100;
+                var svgNoseTipY = (face.noseTipY - face.faceRectangleTop) / faceH * 100;
 
 
                 var nose = angular.element(
@@ -150,8 +153,8 @@ app.directive('musicalFace', function() {
                     position: 'absolute',
                     top: face.faceRectangleTop * scale + 'px',
                     left: face.faceRectangleLeft * scale + 'px',
-                    width: face.faceRectangleWidth * scale + 'px',
-                    height: face.faceRectangleHeight * scale + 'px'
+                    width: faceW * scale + 'px',
+                    height: faceH * scale + 'px'
                 });
             }, 1000);
         }
