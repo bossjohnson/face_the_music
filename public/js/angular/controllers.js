@@ -1,11 +1,16 @@
+// Register Controllers
 app.controller('uploadCtrl', uploadCtrl);
 app.controller('dataFetchCtrl', dataFetchCtrl);
 app.controller('faceCtrl', faceCtrl);
+app.controller('synthCtrl', synthCtrl);
 
+// Inject Dependencies
 uploadCtrl.$inject = ['$scope', '$http', 'Upload'];
 dataFetchCtrl.$inject = ['$scope', '$http', '$rootScope'];
-faceCtrl.$inject = ['$scope', '$timeout', '$http'];
+faceCtrl.$inject = ['$scope', '$timeout', '$http', '$rootScope'];
+synthCtrl.$inject = ['$rootScope'];
 
+// Controller Functions
 function uploadCtrl($scope, $http, Upload) {
     $scope.upload = {};
 
@@ -27,8 +32,6 @@ function dataFetchCtrl($scope, $http, $rootScope) {
     $http.get('/faces/all').then(function(data) {
         $scope.view.faceIds = data.data;
     });
-    $scope.audioContext = new window.AudioContext();
-    $scope.tuna = new Tuna($scope.audioContext);
 
     $rootScope.imagesHidden = false;
 
@@ -37,97 +40,97 @@ function dataFetchCtrl($scope, $http, $rootScope) {
     }
 }
 
-function faceCtrl($scope, $timeout, $http) {
+function synthCtrl($rootScope) {
+    $rootScope.audioContext = new window.AudioContext();
+    $rootScope.tuna = new Tuna($rootScope.audioContext);
+}
+
+function faceCtrl($scope, $timeout, $http, $rootScope) {
     $http.get('/faces/' + $scope.faceId).then(function(data) {
         $scope.face = data.data[0];
 
         var face = $scope.face;
+        var faceWidth = face.faceRectangleWidth;
+        var faceHeight = face.faceRectangleHeight;
+        var faceLeft = face.faceRectangleLeft;
+        var faceTop = face.faceRectangleTop;
 
-        var audioContext = $scope.$parent.audioContext;
-        var tuna = $scope.$parent.tuna;
+        // Left Eye
+        var leftEye = {
+            outerX: (face.eyeLeftOuterX - faceLeft) / faceWidth * 100,
+            outerY: (face.eyeLeftOuterY - faceTop) / faceHeight * 100,
+            topX: (face.eyeLeftTopX - faceLeft) / faceWidth * 100,
+            topY: (face.eyeLeftTopY - faceTop) / faceHeight * 100,
+            innerX: (face.eyeLeftInnerX - faceLeft) / faceWidth * 100,
+            innerY: (face.eyeLeftInnerY - faceTop) / faceHeight * 100,
+            bottomX: (face.eyeLeftBottomX - faceLeft) / faceWidth * 100,
+            bottomY: (face.eyeLeftBottomY - faceTop) / faceHeight * 100
+        };
+        $scope.leftEye = leftEye;
 
-        var eyeSpace = face.eyeRightOuterX - face.eyeLeftOuterX;
+        // Right Eye
+        var rightEye = {
+            outerX: (face.eyeRightOuterX - faceLeft) / faceWidth * 100,
+            outerY: (face.eyeRightOuterY - faceTop) / faceHeight * 100,
+            topX: (face.eyeRightTopX - faceLeft) / faceWidth * 100,
+            topY: (face.eyeRightTopY - faceTop) / faceHeight * 100,
+            innerX: (face.eyeRightInnerX - faceLeft) / faceWidth * 100,
+            innerY: (face.eyeRightInnerY - faceTop) / faceHeight * 100,
+            bottomX: (face.eyeRightBottomX - faceLeft) / faceWidth * 100,
+            bottomY: (face.eyeRightBottomY - faceTop) / faceHeight * 100
+        };
+        $scope.rightEye = rightEye;
 
-        var eyebrowSpaceY = Math.abs(face.eyebrowRightOuterY - face.eyebrowLeftOuterY);
-        var eyebrowSpaceX = Math.abs(face.eyebrowRightOuterX - face.eyebrowLeftOuterX);
+        // Mouth
+        var mouth = {
+            leftX: (face.mouthLeftX - faceLeft) / faceWidth * 100,
+            leftY: (face.mouthLeftY - faceTop) / faceHeight * 100,
+            rightX: (face.mouthRightX - faceLeft) / faceWidth * 100,
+            rightY: (face.mouthRightY - faceTop) / faceHeight * 100,
+            upperLipTopX: (face.upperLipTopX - faceLeft) / faceWidth * 100,
+            upperLipTopY: (face.upperLipTopY - faceTop) / faceHeight * 100,
+            upperLipBottomX: (face.upperLipBottomX - faceLeft) / faceWidth * 100,
+            upperLipBottomY: (face.upperLipBottomY - faceTop) / faceHeight * 100,
+            underLipTopX: (face.underLipTopX - faceLeft) / faceWidth * 100,
+            underLipTopY: (face.underLipTopY - faceTop) / faceHeight * 100,
+            underLipBottomX: (face.underLipBottomX - faceLeft) / faceWidth * 100,
+            underLipBottomY: (face.underLipBottomY - faceTop) / faceHeight * 100
+        };
+        $scope.mouth = mouth;
 
-        var mouthWidth = face.mouthRightX - face.mouthLeftX;
+        // Nose
+        var nose = {
+            rootLeftX: (face.noseRootLeftX - faceLeft) / faceWidth * 100,
+            rootLeftY: (face.noseRootLeftY - faceTop) / faceHeight * 100,
+            rootRightX: (face.noseRootRightX - faceLeft) / faceWidth * 100,
+            rootRightY: (face.noseRootRightY - faceTop) / faceHeight * 100,
+            leftAlarTopX: (face.noseLeftAlarTopX - faceLeft) / faceWidth * 100,
+            leftAlarTopY: (face.noseLeftAlarTopY - faceTop) / faceHeight * 100,
+            rightAlarTopX: (face.noseRightAlarTopX - faceLeft) / faceWidth * 100,
+            rightAlarTopY: (face.noseRightAlarTopY - faceTop) / faceHeight * 100,
+            leftAlarOutTipX: (face.noseLeftAlarOutTipX - faceLeft) / faceWidth * 100,
+            leftAlarOutTipY: (face.noseLeftAlarOutTipY - faceTop) / faceHeight * 100,
+            rightAlarOutTipX: (face.noseRightAlarOutTipX - faceLeft) / faceWidth * 100,
+            rightAlarOutTipY: (face.noseRightAlarOutTipY - faceTop) / faceHeight * 100,
+            tipX: (face.noseTipX - faceLeft) / faceWidth * 100,
+            tipY: (face.noseTipY - faceTop) / faceHeight * 100
+        };
+        $scope.nose = nose;
 
-        var noseAlarWidth = face.noseRightAlarTopX - face.noseLeftAlarTopX;
+        var audioContext = $rootScope.audioContext;
+        var output = audioContext.destination;
+        var tuna = $rootScope.tuna;
+        var osc = audioContext.createOscillator();
 
-        var noseRootWidth = face.noseRootRightX - face.noseRootLeftX;
+        osc.connect(output);
 
-        var pupilSpace = face.pupilRightX - face.pupilLeftX;
+        osc.frequency.value = (rightEye.outerX - leftEye.outerX) * 10;
 
-        var lipSpace = face.underLipBottomY - face.upperLipTopY;
-
-        var age = face.age;
-
-        $scope.play = function(face) {
-
-            var chorus = new tuna.Chorus({
-                rate: Math.ceil(noseRootWidth / 5), //0.01 to 8+
-                feedback: .7, //0 to 1+
-                delay: 0.1, //0 to 1
-                bypass: 0 //the value 1 starts the effect as bypassed, 0 or 1
-            });
-            var delay = new tuna.Delay({
-                feedback: pupilSpace / 600, //0 to 1+
-                delayTime: eyeSpace / 2, //how many milliseconds should the wet signal be delayed?
-                wetLevel: 0.25, //0 to 1+
-                dryLevel: 1, //0 to 1+
-                cutoff: 2000, //cutoff frequency of the built in lowpass-filter. 20 to 22050
-                bypass: 0
-            });
-            var phaser = new tuna.Phaser({
-                rate: eyebrowSpaceY, //0.01 to 8 is a decent range, but higher values are possible
-                depth: 0.8, //0 to 1
-                feedback: 0.5, //0 to 1+
-                stereoPhase: eyebrowSpaceY + eyebrowSpaceX * 9, //0 to 180
-                baseModulationFrequency: eyebrowSpaceY * 10, //500 to 1500
-                bypass: 0
-            });
-            var filter = new tuna.Filter({
-                frequency: lipSpace * 100, //20 to 22050
-                Q: lipSpace, //0.001 to 100
-                gain: 10, //-40 to 40
-                filterType: "bandpass", //lowpass, highpass, bandpass, lowshelf, highshelf, peaking, notch, allpass
-                bypass: 0
-            });
-            var wahwah = new tuna.WahWah({
-                automode: true, //true/false
-                baseFrequency: .5, //0 to 1
-                excursionOctaves: 2, //1 to 6
-                sweep: 0.8, //0 to 1
-                resonance: noseAlarWidth, //1 to 100
-                sensitivity: 0.7, //-1 to 1
-                bypass: 0
-            });
-
-            generateTone(200);
-
-            function generateTone(duration) {
-                // Create oscillator
-                var osc = audioContext.createOscillator();
-                osc.frequency.value = mouthWidth * age / 16;
-
-                // Set oscillator type
-                osc.type = $scope.face.gender === 'female' ? 'square' : 'sawtooth';
-
-                // Connections
-                osc.connect(chorus);
-                chorus.connect(delay);
-                delay.connect(phaser);
-                phaser.connect(filter);
-                filter.connect(wahwah);
-                wahwah.connect(audioContext.destination);
-
-                // Play it!
-                osc.start();
-                $timeout(function() {
-                    osc.stop();
-                }, duration);
-            }
+        $scope.play = function() {
+            osc.start();
+            $timeout(function() {
+                osc.stop();
+            }, 1000);
         }
     });
 }
