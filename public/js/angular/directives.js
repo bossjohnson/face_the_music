@@ -18,8 +18,8 @@ function drawFaces(scope, element, attrs) {
 
         // Face Rectangle
         var faceRect = angular.element('<div></div>');
-        var faceH = face.faceRectangleHeight;
-        var faceW = face.faceRectangleWidth;
+        var faceHeight = face.faceRectangleHeight;
+        var faceWidth = face.faceRectangleWidth;
 
         // Left Eye
         var leftEye = scope.leftEye;
@@ -95,8 +95,8 @@ function drawFaces(scope, element, attrs) {
             position: 'absolute',
             top: face.faceRectangleTop * scale + 'px',
             left: face.faceRectangleLeft * scale + 'px',
-            width: faceW * scale + 'px',
-            height: faceH * scale + 'px'
+            width: faceWidth * scale + 'px',
+            height: faceHeight * scale + 'px'
         });
     }, 1000);
 }
