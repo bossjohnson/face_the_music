@@ -86,49 +86,49 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
         // Play a face
         $scope.play = function() {
 
-        $scope.oscillators = [];
+            $scope.oscillators = [];
 
-        var osc = faceService.makeTone(leftEye.outerX, leftEye.innerX, chain);
-        $scope.oscillators.push(osc);
+            var osc = faceService.makeTone(leftEye.outerX, leftEye.innerX, chain);
+            $scope.oscillators.push(osc);
 
-        osc = faceService.makeTone(rightEye.innerX, rightEye.outerX, chain);
-        $scope.oscillators.push(osc);
+            osc = faceService.makeTone(rightEye.innerX, rightEye.outerX, chain);
+            $scope.oscillators.push(osc);
 
-        osc = faceService.makeTone(leftEye.topY, leftEye.bottomY, chain);
-        $scope.oscillators.push(osc);
+            osc = faceService.makeTone(leftEye.topY, leftEye.bottomY, chain);
+            $scope.oscillators.push(osc);
 
-        osc = faceService.makeTone(rightEye.topY, rightEye.bottomY, chain);
-        $scope.oscillators.push(osc);
+            osc = faceService.makeTone(rightEye.topY, rightEye.bottomY, chain);
+            $scope.oscillators.push(osc);
 
-        osc = faceService.makeTone(nose.rootLeftX, nose.rootRightX, chain);
-        $scope.oscillators.push(osc);
+            osc = faceService.makeTone(nose.rootLeftX, nose.rootRightX, chain);
+            $scope.oscillators.push(osc);
 
-        osc = faceService.makeTone(nose.rootLeftY, nose.leftAlarTopY, chain);
-        $scope.oscillators.push(osc);
+            osc = faceService.makeTone(nose.rootLeftY, nose.leftAlarTopY, chain);
+            $scope.oscillators.push(osc);
 
-        osc = faceService.makeTone(nose.rootRightY, nose.rightAlarTopY, chain);
-        $scope.oscillators.push(osc);
+            osc = faceService.makeTone(nose.rootRightY, nose.rightAlarTopY, chain);
+            $scope.oscillators.push(osc);
 
-        osc = faceService.makeTone(nose.rightAlarTopX, nose.rightAlarOutTipX, chain);
-        $scope.oscillators.push(osc);
+            osc = faceService.makeTone(nose.rightAlarTopX, nose.rightAlarOutTipX, chain);
+            $scope.oscillators.push(osc);
 
-        osc = faceService.makeTone(nose.rightAlarTopY, nose.rightAlarOutTipY, chain);
-        $scope.oscillators.push(osc);
+            osc = faceService.makeTone(nose.rightAlarTopY, nose.rightAlarOutTipY, chain);
+            $scope.oscillators.push(osc);
 
-        osc = faceService.makeTone(nose.tipX, nose.rightAlarOutTipX, chain);
-        $scope.oscillators.push(osc);
+            osc = faceService.makeTone(nose.tipX, nose.rightAlarOutTipX, chain);
+            $scope.oscillators.push(osc);
 
-        // Assign relative lengths to each note in the sequence
-        for (var i = 0; i < $scope.oscillators.length; i++) {
-            var duration = Math.ceil(nose.area % ((i + 1) * 2) % 5) % 2 + 1;
-            $scope.oscillators[i].duration = duration;
-            $scope.oscillators[i].next = $scope.oscillators[i + 1] || null;
-        }
+            // Assign relative lengths to each note in the sequence
+            for (var i = 0; i < $scope.oscillators.length; i++) {
+                var duration = Math.ceil(nose.area % ((i + 1) * 2) % 5) % 2 + 1;
+                $scope.oscillators[i].duration = duration;
+                $scope.oscillators[i].next = $scope.oscillators[i + 1] || null;
+            }
 
-        // Play it!
-        var notes = $scope.oscillators;
-        playNote(notes[0]);
-      };
+            // Play it!
+            var notes = $scope.oscillators;
+            playNote(notes[0]);
+        };
     });
 
 
