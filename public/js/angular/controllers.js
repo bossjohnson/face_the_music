@@ -79,73 +79,40 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
             bypass: 0
         });
 
+        var chain = [output];
+        chain.unshift(delay);
+
         $scope.oscillators = [];
         var a = Math.pow(2, 1 / 12); // Constant used in calculating note frequency
 
-        var osc = audioContext.createOscillator();
-        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(leftEye.innerX - leftEye.outerX)));
-        osc.connect(delay);
-        delay.connect(output);
+        var osc = faceService.makeTone(leftEye.outerX, leftEye.innerX, chain);
         $scope.oscillators.push(osc);
 
-        osc = audioContext.createOscillator();
-        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(rightEye.outerX - rightEye.innerX)));
-        osc.connect(delay);
-        delay.connect(output);
+        osc = faceService.makeTone(rightEye.innerX, rightEye.outerX, chain);
         $scope.oscillators.push(osc);
 
-        osc = audioContext.createOscillator();
-        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(leftEye.bottomY - leftEye.topY)));
-        osc.connect(delay);
-        delay.connect(output);
+        osc = faceService.makeTone(leftEye.topY, leftEye.bottomY, chain);
         $scope.oscillators.push(osc);
 
-        osc = audioContext.createOscillator();
-        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(rightEye.bottomY - rightEye.topY)));
-        osc.connect(delay);
-        delay.connect(output);
+        osc = faceService.makeTone(rightEye.topY, rightEye.bottomY, chain);
         $scope.oscillators.push(osc);
 
-        osc = audioContext.createOscillator();
-        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(nose.rootRightX - nose.rootLeftX)));
-        osc.connect(delay);
-        delay.connect(output);
+        osc = faceService.makeTone(nose.rootLeftX, nose.rootRightX, chain);
         $scope.oscillators.push(osc);
 
-        osc = audioContext.createOscillator();
-        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(nose.leftAlarTopY - nose.rootLeftY)));
-        osc.connect(delay);
-        delay.connect(output);
+        osc = faceService.makeTone(nose.rootLeftY, nose.leftAlarTopY, chain);
         $scope.oscillators.push(osc);
 
-        osc = audioContext.createOscillator();
-        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(nose.rightAlarTopY - nose.rootRightY)));
-        osc.connect(delay);
-        delay.connect(output);
+        osc = faceService.makeTone(nose.rootRightY, nose.rightAlarTopY, chain);
         $scope.oscillators.push(osc);
 
-        osc = audioContext.createOscillator();
-        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(nose.rightAlarOutTipX - nose.rightAlarTopX)));
-        osc.connect(delay);
-        delay.connect(output);
+        osc = faceService.makeTone(nose.rightAlarTopX, nose.rightAlarOutTipX, chain);
         $scope.oscillators.push(osc);
 
-        osc = audioContext.createOscillator();
-        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(nose.rightAlarOutTipX - nose.rightAlarTopX)));
-        osc.connect(delay);
-        delay.connect(output);
+        osc = faceService.makeTone(nose.rightAlarTopY, nose.rightAlarOutTipY, chain);
         $scope.oscillators.push(osc);
 
-        osc = audioContext.createOscillator();
-        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(nose.rightAlarOutTipY - nose.rightAlarTopY)));
-        osc.connect(delay);
-        delay.connect(output);
-        $scope.oscillators.push(osc);
-
-        osc = audioContext.createOscillator();
-        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(nose.rightAlarOutTipX - nose.tipX)));
-        osc.connect(delay);
-        delay.connect(output);
+        osc = faceService.makeTone(nose.tipX, nose.rightAlarOutTipX, chain);
         $scope.oscillators.push(osc);
 
         // Assign relative lengths to each note in the sequence
@@ -172,40 +139,57 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
     }
 }
 
+var keyA = { // TODO: generate key frequencies dynamically
+    octD_Root: 220,
+    octD_M2: 246.94,
+    octD_M3: 277.18,
+    octD_P4: 293.66,
+    octD_P5: 329.63,
+    octD_M6: 369.99,
+    octD_M7: 415.30,
+    root: 440,
+    M2: 493.88,
+    M3: 554.37,
+    P4: 587.33,
+    P5: 659.25,
+    M6: 739.99,
+    M7: 830.61,
+    octUp: 880
+};
 
-function keyFilter(freq) { // for now just normalize to key of A // TODO: change function to pass in a key
+function keyFilter(freq) { // TODO: change function to pass in a key
     switch (true) {
-        case freq <= keyA['A4']:
-            return keyA['A4']
-        case freq <= keyA['B4']:
-            return keyA['B4'];
-        case freq <= keyA['Csh5']:
-            return keyA['Csh5'];
-        case freq <= keyA['D5']:
-            return keyA['D5'];
-        case freq <= keyA['E5']:
-            return keyA['E5'];
-        case freq <= keyA['Fsh5']:
-            return keyA['Fsh5'];
-        case freq <= keyA['Gsh5']:
-            return keyA['Gsh5'];
-        case freq <= keyA['A5']:
-            return keyA['A5'];
+        case freq <= keyA['octD_Root']:
+            return keyA['octD_Root'];
+        case freq <= keyA['octD_M2']:
+            return keyA['octD_M2'];
+        case freq <= keyA['octD_M3']:
+            return keyA['octD_M3'];
+        case freq <= keyA['octD_P4']:
+            return keyA['octD_P4'];
+        case freq <= keyA['octD_P5']:
+            return keyA['octD_P5'];
+        case freq <= keyA['octD_M6']:
+            return keyA['octD_M6'];
+        case freq <= keyA['octD_M7']:
+            return keyA['octD_M7'];
+        case freq <= keyA['root']:
+            return keyA['root'];
+        case freq <= keyA['M2']:
+            return keyA['M2'];
+        case freq <= keyA['M3']:
+            return keyA['M3'];
+        case freq <= keyA['P4']:
+            return keyA['P4'];
+        case freq <= keyA['P5']:
+            return keyA['P5'];
+        case freq <= keyA['M6']:
+            return keyA['M6'];
+        case freq <= keyA['M7']:
+            return keyA['M7'];
+        case freq <= keyA['octUp']:
+            return keyA['octUp'];
         default:
-            return 440;
+            return keyA['root'];
     }
 }
-
-
-
-// A B C# D E F# G# A
-var keyA = {
-    A4: 440,
-    B4: 493.88,
-    Csh5: 554.37,
-    D5: 587.33,
-    E5: 659.25,
-    Fsh5: 739.99,
-    Gsh5: 830.61,
-    A5: 880
-};

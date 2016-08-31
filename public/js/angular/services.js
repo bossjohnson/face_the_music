@@ -1,6 +1,6 @@
 app.service('faceService', faceService);
 
-function faceService() {
+function faceService($rootScope) {
     this.analyzeFace = function(face) {
         var faceWidth = face.faceRectangleWidth;
         var faceHeight = face.faceRectangleHeight;
@@ -81,6 +81,24 @@ function faceService() {
         ];;
         return Math.abs(polygonArea(noseXArray, noseYArray, 7));
     };
+
+    this.makeTone = function(val1, val2, chain) {
+        var a = Math.pow(2, 1 / 12); // Constant used in calculating note frequency
+
+        var osc = $rootScope.audioContext.createOscillator();
+        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(val2 - val1)));
+        connect(osc, chain.slice());
+        return osc;
+    }
+}
+
+faceService.$inject = ['$rootScope'];
+
+function connect(node, chain) {
+    if (!chain.length) return;
+    var nextNode = chain.shift();
+    node.connect(nextNode);
+    connect(nextNode, chain);
 }
 
 function polygonArea(X, Y, numPoints) {
@@ -92,4 +110,59 @@ function polygonArea(X, Y, numPoints) {
         j = i; //j is previous vertex to i
     }
     return area / 2;
+}
+
+var keyA = { // TODO: generate key frequencies dynamically
+    octD_Root: 220,
+    octD_M2: 246.94,
+    octD_M3: 277.18,
+    octD_P4: 293.66,
+    octD_P5: 329.63,
+    octD_M6: 369.99,
+    octD_M7: 415.30,
+    root: 440,
+    M2: 493.88,
+    M3: 554.37,
+    P4: 587.33,
+    P5: 659.25,
+    M6: 739.99,
+    M7: 830.61,
+    octUp: 880
+};
+
+function keyFilter(freq) { // TODO: change function to pass in a key
+    switch (true) {
+        case freq <= keyA['octD_Root']:
+            return keyA['octD_Root'];
+        case freq <= keyA['octD_M2']:
+            return keyA['octD_M2'];
+        case freq <= keyA['octD_M3']:
+            return keyA['octD_M3'];
+        case freq <= keyA['octD_P4']:
+            return keyA['octD_P4'];
+        case freq <= keyA['octD_P5']:
+            return keyA['octD_P5'];
+        case freq <= keyA['octD_M6']:
+            return keyA['octD_M6'];
+        case freq <= keyA['octD_M7']:
+            return keyA['octD_M7'];
+        case freq <= keyA['root']:
+            return keyA['root'];
+        case freq <= keyA['M2']:
+            return keyA['M2'];
+        case freq <= keyA['M3']:
+            return keyA['M3'];
+        case freq <= keyA['P4']:
+            return keyA['P4'];
+        case freq <= keyA['P5']:
+            return keyA['P5'];
+        case freq <= keyA['M6']:
+            return keyA['M6'];
+        case freq <= keyA['M7']:
+            return keyA['M7'];
+        case freq <= keyA['octUp']:
+            return keyA['octUp'];
+        default:
+            return keyA['root'];
+    }
 }
