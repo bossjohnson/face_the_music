@@ -83,67 +83,67 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
         var a = Math.pow(2, 1 / 12); // Constant used in calculating note frequency
 
         var osc = audioContext.createOscillator();
-        osc.frequency.value = 440 * Math.pow(a, Math.floor(leftEye.innerX - leftEye.outerX));
+        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(leftEye.innerX - leftEye.outerX)));
         osc.connect(delay);
         delay.connect(output);
         $scope.oscillators.push(osc);
 
         osc = audioContext.createOscillator();
-        osc.frequency.value = 440 * Math.pow(a, Math.floor(rightEye.outerX - rightEye.innerX));
+        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(rightEye.outerX - rightEye.innerX)));
         osc.connect(delay);
         delay.connect(output);
         $scope.oscillators.push(osc);
 
         osc = audioContext.createOscillator();
-        osc.frequency.value = 440 * Math.pow(a, Math.floor(leftEye.bottomY - leftEye.topY));
+        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(leftEye.bottomY - leftEye.topY)));
         osc.connect(delay);
         delay.connect(output);
         $scope.oscillators.push(osc);
 
         osc = audioContext.createOscillator();
-        osc.frequency.value = 440 * Math.pow(a, Math.floor(rightEye.bottomY - rightEye.topY));
+        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(rightEye.bottomY - rightEye.topY)));
         osc.connect(delay);
         delay.connect(output);
         $scope.oscillators.push(osc);
 
         osc = audioContext.createOscillator();
-        osc.frequency.value = 440 * Math.pow(a, Math.floor(nose.rootRightX - nose.rootLeftX));
+        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(nose.rootRightX - nose.rootLeftX)));
         osc.connect(delay);
         delay.connect(output);
         $scope.oscillators.push(osc);
 
         osc = audioContext.createOscillator();
-        osc.frequency.value = 440 * Math.pow(a, Math.floor(nose.leftAlarTopY - nose.rootLeftY));
+        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(nose.leftAlarTopY - nose.rootLeftY)));
         osc.connect(delay);
         delay.connect(output);
         $scope.oscillators.push(osc);
 
         osc = audioContext.createOscillator();
-        osc.frequency.value = 440 * Math.pow(a, Math.floor(nose.rightAlarTopY - nose.rootRightY));
+        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(nose.rightAlarTopY - nose.rootRightY)));
         osc.connect(delay);
         delay.connect(output);
         $scope.oscillators.push(osc);
 
         osc = audioContext.createOscillator();
-        osc.frequency.value = 440 * Math.pow(a, Math.floor(nose.rightAlarOutTipX - nose.rightAlarTopX));
+        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(nose.rightAlarOutTipX - nose.rightAlarTopX)));
         osc.connect(delay);
         delay.connect(output);
         $scope.oscillators.push(osc);
 
         osc = audioContext.createOscillator();
-        osc.frequency.value = 440 * Math.pow(a, Math.floor(nose.rightAlarOutTipX - nose.rightAlarTopX));
+        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(nose.rightAlarOutTipX - nose.rightAlarTopX)));
         osc.connect(delay);
         delay.connect(output);
         $scope.oscillators.push(osc);
 
         osc = audioContext.createOscillator();
-        osc.frequency.value = 440 * Math.pow(a, Math.floor(nose.rightAlarOutTipY - nose.rightAlarTopY));
+        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(nose.rightAlarOutTipY - nose.rightAlarTopY)));
         osc.connect(delay);
         delay.connect(output);
         $scope.oscillators.push(osc);
 
         osc = audioContext.createOscillator();
-        osc.frequency.value = 440 * Math.pow(a, Math.floor(nose.rightAlarOutTipX - nose.tipX));
+        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(nose.rightAlarOutTipX - nose.tipX)));
         osc.connect(delay);
         delay.connect(output);
         $scope.oscillators.push(osc);
@@ -163,11 +163,49 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
     };
 
     function playNote(note) {
-      if (!note) return;
-      note.start();
-      $timeout(function() {
-        note.stop();
-        playNote(note.next)
-      }, note.duration * 300)
+        if (!note) return;
+        note.start();
+        $timeout(function() {
+            note.stop();
+            playNote(note.next)
+        }, note.duration * 300)
     }
 }
+
+
+function keyFilter(freq) { // for now just normalize to key of A // TODO: change function to pass in a key
+    switch (true) {
+        case freq <= keyA['A4']:
+            return keyA['A4']
+        case freq <= keyA['B4']:
+            return keyA['B4'];
+        case freq <= keyA['Csh5']:
+            return keyA['Csh5'];
+        case freq <= keyA['D5']:
+            return keyA['D5'];
+        case freq <= keyA['E5']:
+            return keyA['E5'];
+        case freq <= keyA['Fsh5']:
+            return keyA['Fsh5'];
+        case freq <= keyA['Gsh5']:
+            return keyA['Gsh5'];
+        case freq <= keyA['A5']:
+            return keyA['A5'];
+        default:
+            return 440;
+    }
+}
+
+
+
+// A B C# D E F# G# A
+var keyA = {
+    A4: 440,
+    B4: 493.88,
+    Csh5: 554.37,
+    D5: 587.33,
+    E5: 659.25,
+    Fsh5: 739.99,
+    Gsh5: 830.61,
+    A5: 880
+};
