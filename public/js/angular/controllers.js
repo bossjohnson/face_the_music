@@ -79,11 +79,14 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
             bypass: 0
         });
 
+        // Signal flow chain: node --> effects --> output
         var chain = [output];
         chain.unshift(delay);
 
+        // Play a face
+        $scope.play = function() {
+
         $scope.oscillators = [];
-        var a = Math.pow(2, 1 / 12); // Constant used in calculating note frequency
 
         var osc = faceService.makeTone(leftEye.outerX, leftEye.innerX, chain);
         $scope.oscillators.push(osc);
@@ -121,13 +124,13 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
             $scope.oscillators[i].duration = duration;
             $scope.oscillators[i].next = $scope.oscillators[i + 1] || null;
         }
-    });
 
-    // Play a face
-    $scope.play = function() {
+        // Play it!
         var notes = $scope.oscillators;
         playNote(notes[0]);
-    };
+      };
+    });
+
 
     function playNote(note) {
         if (!note) return;
