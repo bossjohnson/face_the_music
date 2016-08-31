@@ -91,7 +91,6 @@ function drawFaces(scope, element, attrs) {
         faceRect.css({
             'z-index': 1,
             border: '2px dotted black',
-            'border-radius': '50%',
             position: 'absolute',
             top: face.faceRectangleTop * scale + 'px',
             left: face.faceRectangleLeft * scale + 'px',

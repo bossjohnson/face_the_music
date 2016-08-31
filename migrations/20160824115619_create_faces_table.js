@@ -31,6 +31,10 @@ exports.up = function(knex, Promise) {
         table.decimal('eyebrowLeftOuterY');
         table.decimal('eyebrowLeftInnerX');
         table.decimal('eyebrowLeftInnerY');
+        table.decimal('eyebrowRightOuterX');
+        table.decimal('eyebrowRightOuterY');
+        table.decimal('eyebrowRightInnerX');
+        table.decimal('eyebrowRightInnerY');
         table.decimal('eyeLeftOuterX');
         table.decimal('eyeLeftOuterY');
         table.decimal('eyeLeftTopX');
@@ -39,10 +43,6 @@ exports.up = function(knex, Promise) {
         table.decimal('eyeLeftBottomY');
         table.decimal('eyeLeftInnerX');
         table.decimal('eyeLeftInnerY');
-        table.decimal('eyebrowRightOuterX');
-        table.decimal('eyebrowRightOuterY');
-        table.decimal('eyebrowRightInnerX');
-        table.decimal('eyebrowRightInnerY');
         table.decimal('eyeRightOuterX');
         table.decimal('eyeRightOuterY');
         table.decimal('eyeRightTopX');

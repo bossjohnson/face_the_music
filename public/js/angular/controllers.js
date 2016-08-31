@@ -57,6 +57,7 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
         var rightEye = analyzedFace.rightEye;
         var mouth = analyzedFace.mouth;
         var nose = analyzedFace.nose;
+        nose.area = faceService.getNoseArea(nose);
 
         $scope.leftEye = leftEye;
         $scope.rightEye = rightEye;
@@ -65,18 +66,108 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
 
         var audioContext = $rootScope.audioContext;
         var output = audioContext.destination;
+
+        // Tuna Effects
         var tuna = $rootScope.tuna;
+
+        var delay = new tuna.Delay({
+            feedback: 0.3, //0 to 1+
+            delayTime: 200, //how many milliseconds should the wet signal be delayed?
+            wetLevel: 0.6, //0 to 1+
+            dryLevel: 1, //0 to 1+
+            cutoff: 2000, //cutoff frequency of the built in lowpass-filter. 20 to 22050
+            bypass: 0
+        });
+
+        $scope.oscillators = [];
+        var a = Math.pow(2, 1 / 12); // Constant used in calculating note frequency
+
         var osc = audioContext.createOscillator();
+        osc.frequency.value = 440 * Math.pow(a, Math.floor(leftEye.innerX - leftEye.outerX));
+        osc.connect(delay);
+        delay.connect(output);
+        $scope.oscillators.push(osc);
 
-        osc.connect(output);
+        osc = audioContext.createOscillator();
+        osc.frequency.value = 440 * Math.pow(a, Math.floor(rightEye.outerX - rightEye.innerX));
+        osc.connect(delay);
+        delay.connect(output);
+        $scope.oscillators.push(osc);
 
-        osc.frequency.value = (rightEye.outerX - leftEye.outerX) * 10;
+        osc = audioContext.createOscillator();
+        osc.frequency.value = 440 * Math.pow(a, Math.floor(leftEye.bottomY - leftEye.topY));
+        osc.connect(delay);
+        delay.connect(output);
+        $scope.oscillators.push(osc);
 
-        $scope.play = function() {
-            osc.start();
-            $timeout(function() {
-                osc.stop();
-            }, 1000);
+        osc = audioContext.createOscillator();
+        osc.frequency.value = 440 * Math.pow(a, Math.floor(rightEye.bottomY - rightEye.topY));
+        osc.connect(delay);
+        delay.connect(output);
+        $scope.oscillators.push(osc);
+
+        osc = audioContext.createOscillator();
+        osc.frequency.value = 440 * Math.pow(a, Math.floor(nose.rootRightX - nose.rootLeftX));
+        osc.connect(delay);
+        delay.connect(output);
+        $scope.oscillators.push(osc);
+
+        osc = audioContext.createOscillator();
+        osc.frequency.value = 440 * Math.pow(a, Math.floor(nose.leftAlarTopY - nose.rootLeftY));
+        osc.connect(delay);
+        delay.connect(output);
+        $scope.oscillators.push(osc);
+
+        osc = audioContext.createOscillator();
+        osc.frequency.value = 440 * Math.pow(a, Math.floor(nose.rightAlarTopY - nose.rootRightY));
+        osc.connect(delay);
+        delay.connect(output);
+        $scope.oscillators.push(osc);
+
+        osc = audioContext.createOscillator();
+        osc.frequency.value = 440 * Math.pow(a, Math.floor(nose.rightAlarOutTipX - nose.rightAlarTopX));
+        osc.connect(delay);
+        delay.connect(output);
+        $scope.oscillators.push(osc);
+
+        osc = audioContext.createOscillator();
+        osc.frequency.value = 440 * Math.pow(a, Math.floor(nose.rightAlarOutTipX - nose.rightAlarTopX));
+        osc.connect(delay);
+        delay.connect(output);
+        $scope.oscillators.push(osc);
+
+        osc = audioContext.createOscillator();
+        osc.frequency.value = 440 * Math.pow(a, Math.floor(nose.rightAlarOutTipY - nose.rightAlarTopY));
+        osc.connect(delay);
+        delay.connect(output);
+        $scope.oscillators.push(osc);
+
+        osc = audioContext.createOscillator();
+        osc.frequency.value = 440 * Math.pow(a, Math.floor(nose.rightAlarOutTipX - nose.tipX));
+        osc.connect(delay);
+        delay.connect(output);
+        $scope.oscillators.push(osc);
+
+        // Assign relative lengths to each note in the sequence
+        for (var i = 0; i < $scope.oscillators.length; i++) {
+            var duration = Math.ceil(nose.area % ((i + 1) * 2) % 5) % 2 + 1;
+            $scope.oscillators[i].duration = duration;
+            $scope.oscillators[i].next = $scope.oscillators[i + 1] || null;
         }
     });
+
+    // Play a face
+    $scope.play = function() {
+        var notes = $scope.oscillators;
+        playNote(notes[0]);
+    };
+
+    function playNote(note) {
+      if (!note) return;
+      note.start();
+      $timeout(function() {
+        note.stop();
+        playNote(note.next)
+      }, note.duration * 300)
+    }
 }

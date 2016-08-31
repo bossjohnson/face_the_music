@@ -59,4 +59,37 @@ function faceService() {
             }
         };
     };
+
+    this.getNoseArea = function(nose) {
+        var noseXArray = [
+            nose.rootLeftX,
+            nose.rootRightX,
+            nose.rightAlarTopX,
+            nose.rightAlarOutTipX,
+            nose.tipX,
+            nose.leftAlarOutTipX,
+            nose.leftAlarTopX
+        ];
+        var noseYArray = [
+            nose.rootLeftY,
+            nose.rootRightY,
+            nose.rightAlarTopY,
+            nose.rightAlarOutTipY,
+            nose.tipY,
+            nose.leftAlarOutTipY,
+            nose.leftAlarTopY
+        ];;
+        return Math.abs(polygonArea(noseXArray, noseYArray, 7));
+    };
+}
+
+function polygonArea(X, Y, numPoints) {
+    var area = 0; // Accumulates area in the loop
+    var j = numPoints - 1; // The last vertex is the 'previous' one to the first
+
+    for (var i = 0; i < numPoints; i++) {
+        area = area + (X[j] + X[i]) * (Y[j] - Y[i]);
+        j = i; //j is previous vertex to i
+    }
+    return area / 2;
 }

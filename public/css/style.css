@@ -94,8 +94,6 @@ main {
     [musical-face] img.hidden {
       opacity: 0; }
     [musical-face] img:hover {
-      position: relative;
-      top: -5px;
       cursor: pointer; }
 
 svg {
