@@ -63,16 +63,15 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
         $scope.nose = nose;
 
         var audioContext = $rootScope.audioContext;
-        // var gainNode = audioContext.createGain();
         var output = audioContext.destination;
 
         // Tuna Effects
         var tuna = $rootScope.tuna;
 
         var delay = new tuna.Delay({
-            feedback: 0.3, //0 to 1+
+            feedback: 0.15, //0 to 1+
             delayTime: 6 * (rightEye.outerX - leftEye.outerX), //how many milliseconds should the wet signal be delayed?
-            wetLevel: 0.6, //0 to 1+
+            wetLevel: 0.3, //0 to 1+
             dryLevel: 1, //0 to 1+
             cutoff: nose.area * 6, //cutoff frequency of the built in lowpass-filter. 20 to 22050
             bypass: 0
@@ -95,58 +94,52 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
 
             $scope.oscillators = [];
 
-            var osc = faceService.makeTone(leftEye.outerX, leftEye.innerX, chain);
-            osc.start();
+            // Create a series of eight notes based on facial qualities
+
+            // Left Eye Width
+            var osc = faceService.makeTone((leftEye.innerX - leftEye.outerX), chain);
             $scope.oscillators.push(osc);
 
-            osc = faceService.makeTone(rightEye.innerX, rightEye.outerX, chain);
-            osc.start();
+            // Left Eye Height
+            osc = faceService.makeTone((leftEye.bottomY - leftEye.topY), chain);
             $scope.oscillators.push(osc);
 
-            osc = faceService.makeTone(leftEye.topY, leftEye.bottomY, chain);
-            osc.start();
+            // Right Eye Width
+            osc = faceService.makeTone((rightEye.outerX - rightEye.innerX), chain);
             $scope.oscillators.push(osc);
 
-            osc = faceService.makeTone(rightEye.topY, rightEye.bottomY, chain);
-            osc.start();
+            // Right Eye Height
+            osc = faceService.makeTone((rightEye.bottomY - rightEye.topY), chain);
             $scope.oscillators.push(osc);
 
-            osc = faceService.makeTone(nose.rootLeftX, nose.rootRightX, chain);
-            osc.start();
+            // Mouth Width
+            osc = faceService.makeTone((mouth.rightX - mouth.leftX) / 3, chain);
             $scope.oscillators.push(osc);
 
-            osc = faceService.makeTone(nose.rootLeftY, nose.leftAlarTopY, chain);
-            osc.start();
+            // Mouth Height
+            osc = faceService.makeTone((mouth.underLipBottomY - mouth.underLipTopY) / 2, chain);
             $scope.oscillators.push(osc);
 
-            osc = faceService.makeTone(nose.rootRightY, nose.rightAlarTopY, chain);
-            osc.start();
+            // Nose Width
+            osc = faceService.makeTone((nose.rightAlarOutTipX - nose.leftAlarOutTipX) / 2, chain);
             $scope.oscillators.push(osc);
 
-            osc = faceService.makeTone(nose.rightAlarTopX, nose.rightAlarOutTipX, chain);
-            osc.start();
-            $scope.oscillators.push(osc);
-
-            osc = faceService.makeTone(nose.rightAlarTopY, nose.rightAlarOutTipY, chain);
-            osc.start();
-            $scope.oscillators.push(osc);
-
-            osc = faceService.makeTone(nose.tipX, nose.rightAlarOutTipX, chain);
-            osc.start();
+            // Nose Height
+            osc = faceService.makeTone((nose.tipY - nose.rootLeftY) / 2, chain);
             $scope.oscillators.push(osc);
 
             // Assign relative lengths to each note in the sequence
             for (var i = 0; i < $scope.oscillators.length; i++) {
-                var duration = Math.ceil(nose.area % ((i + 1) * 2) % 5) % 2 + 1;
+                // var duration = Math.ceil(nose.area % ((i + 1) * 2) % 5) % 2 + 1;
+                var duration = 1;
                 $scope.oscillators[i].duration = duration;
                 $scope.oscillators[i].next = $scope.oscillators[i + 1] || null;
             }
 
             // Play it!
             var notes = $scope.oscillators;
-            $timeout(function() {
+            $timeout(function() { // small time delay to let nodes start before playing - helps eliminate click
                 playNote(notes[0]);
-
             }, 10);
         };
 
@@ -156,7 +149,7 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
             $timeout(function() {
                 note.gainNode.gain.value = 0;
                 playNote(note.next)
-            }, note.duration * 300)
+            }, note.duration * 300);
         }
     });
 

@@ -82,7 +82,7 @@ function faceService($rootScope) {
         return Math.abs(polygonArea(noseXArray, noseYArray, 7));
     };
 
-    this.makeTone = function(val1, val2, chain) {
+    this.makeTone = function(data, chain) {
         var a = Math.pow(2, 1 / 12); // Constant used in calculating note frequency
 
         var osc = $rootScope.audioContext.createOscillator();
@@ -90,9 +90,10 @@ function faceService($rootScope) {
         gain.gain.value = 0;
         osc.connect(gain);
         osc.gainNode = gain;
+        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(data)));
 
-        osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(val2 - val1)));
         connect(gain, chain.slice());
+        osc.start();
         return osc;
     }
 }
