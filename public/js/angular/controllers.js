@@ -49,14 +49,12 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
     $http.get('/faces/' + $scope.faceId).then(function(data) {
         $scope.face = data.data[0];
 
-        var face = $scope.face;
+        var face = faceService.analyzeFace($scope.face);
 
-        var analyzedFace = faceService.analyzeFace(face);
-
-        var leftEye = analyzedFace.leftEye;
-        var rightEye = analyzedFace.rightEye;
-        var mouth = analyzedFace.mouth;
-        var nose = analyzedFace.nose;
+        var leftEye = face.leftEye;
+        var rightEye = face.rightEye;
+        var mouth = face.mouth;
+        var nose = face.nose;
         nose.area = faceService.getNoseArea(nose);
 
         $scope.leftEye = leftEye;
@@ -65,6 +63,7 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
         $scope.nose = nose;
 
         var audioContext = $rootScope.audioContext;
+        // var gainNode = audioContext.createGain();
         var output = audioContext.destination;
 
         // Tuna Effects
@@ -72,15 +71,23 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
 
         var delay = new tuna.Delay({
             feedback: 0.3, //0 to 1+
-            delayTime: 200, //how many milliseconds should the wet signal be delayed?
+            delayTime: 6 * (rightEye.outerX - leftEye.outerX), //how many milliseconds should the wet signal be delayed?
             wetLevel: 0.6, //0 to 1+
             dryLevel: 1, //0 to 1+
-            cutoff: 2000, //cutoff frequency of the built in lowpass-filter. 20 to 22050
+            cutoff: nose.area * 6, //cutoff frequency of the built in lowpass-filter. 20 to 22050
             bypass: 0
+        });
+
+        var chorus = new tuna.Chorus({
+            rate: (mouth.rightX / mouth.leftX) * 2, //0.01 to 8+
+            feedback: mouth.leftX / mouth.rightX - .2, //0 to 1+
+            delay: mouth.leftX / mouth.rightX, //0 to 1
+            bypass: 0 //the value 1 starts the effect as bypassed, 0 or 1
         });
 
         // Signal flow chain: node --> effects --> output
         var chain = [output];
+        chain.unshift(chorus);
         chain.unshift(delay);
 
         // Play a face
@@ -89,33 +96,43 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
             $scope.oscillators = [];
 
             var osc = faceService.makeTone(leftEye.outerX, leftEye.innerX, chain);
+            osc.start();
             $scope.oscillators.push(osc);
 
             osc = faceService.makeTone(rightEye.innerX, rightEye.outerX, chain);
+            osc.start();
             $scope.oscillators.push(osc);
 
             osc = faceService.makeTone(leftEye.topY, leftEye.bottomY, chain);
+            osc.start();
             $scope.oscillators.push(osc);
 
             osc = faceService.makeTone(rightEye.topY, rightEye.bottomY, chain);
+            osc.start();
             $scope.oscillators.push(osc);
 
             osc = faceService.makeTone(nose.rootLeftX, nose.rootRightX, chain);
+            osc.start();
             $scope.oscillators.push(osc);
 
             osc = faceService.makeTone(nose.rootLeftY, nose.leftAlarTopY, chain);
+            osc.start();
             $scope.oscillators.push(osc);
 
             osc = faceService.makeTone(nose.rootRightY, nose.rightAlarTopY, chain);
+            osc.start();
             $scope.oscillators.push(osc);
 
             osc = faceService.makeTone(nose.rightAlarTopX, nose.rightAlarOutTipX, chain);
+            osc.start();
             $scope.oscillators.push(osc);
 
             osc = faceService.makeTone(nose.rightAlarTopY, nose.rightAlarOutTipY, chain);
+            osc.start();
             $scope.oscillators.push(osc);
 
             osc = faceService.makeTone(nose.tipX, nose.rightAlarOutTipX, chain);
+            osc.start();
             $scope.oscillators.push(osc);
 
             // Assign relative lengths to each note in the sequence
@@ -127,19 +144,23 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
 
             // Play it!
             var notes = $scope.oscillators;
-            playNote(notes[0]);
+            $timeout(function() {
+                playNote(notes[0]);
+
+            }, 10);
         };
+
+        function playNote(note) {
+            if (!note) return;
+            note.gainNode.gain.value = 1;
+            $timeout(function() {
+                note.gainNode.gain.value = 0;
+                playNote(note.next)
+            }, note.duration * 300)
+        }
     });
 
 
-    function playNote(note) {
-        if (!note) return;
-        note.start();
-        $timeout(function() {
-            note.stop();
-            playNote(note.next)
-        }, note.duration * 300)
-    }
 }
 
 var keyA = { // TODO: generate key frequencies dynamically

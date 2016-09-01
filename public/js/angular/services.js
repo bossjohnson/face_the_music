@@ -86,8 +86,13 @@ function faceService($rootScope) {
         var a = Math.pow(2, 1 / 12); // Constant used in calculating note frequency
 
         var osc = $rootScope.audioContext.createOscillator();
+        var gain = $rootScope.audioContext.createGain();
+        gain.gain.value = 0;
+        osc.connect(gain);
+        osc.gainNode = gain;
+
         osc.frequency.value = keyFilter(440 * Math.pow(a, Math.floor(val2 - val1)));
-        connect(osc, chain.slice());
+        connect(gain, chain.slice());
         return osc;
     }
 }
