@@ -88,7 +88,7 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
         });
 
 
-        // 
+        //
         // var filter = new tuna.Filter({
         //     frequency: 440, //20 to 22050
         //     Q: .1, //0.001 to 100

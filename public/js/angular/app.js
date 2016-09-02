@@ -2,8 +2,7 @@ var app = angular.module('faceTheMusicApp', ['ngFileUpload', 'ngRoute']);
 app.config(function($routeProvider) {
     $routeProvider
         .when('/', {
-          templateUrl: 'partials/home.html',
-          controller: ''
+          templateUrl: 'partials/home.html'
         })
         .when('/upload', {
             templateUrl: 'partials/upload.html',
