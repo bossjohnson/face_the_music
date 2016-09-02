@@ -1,6 +1,18 @@
 app.service('faceService', faceService);
 
 function faceService($rootScope) {
+    this.getFacialAttributes = function(face) {
+        return {
+            age: face.age,
+            beard: face.beard,
+            moustache: face.moustache,
+            sideburns: face.sideburns,
+            smile: face.smile,
+            gender: face.gender,
+            glasses: face.glasses
+        }
+    };
+
     this.analyzeFace = function(face) {
         var faceWidth = face.faceRectangleWidth;
         var faceHeight = face.faceRectangleHeight;

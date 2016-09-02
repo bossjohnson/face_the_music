@@ -49,7 +49,10 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
     $http.get('/faces/' + $scope.faceId).then(function(data) {
         $scope.face = data.data[0];
 
+        var faceAttrs = faceService.getFacialAttributes($scope.face);
+        // console.log(faceAttrs);
         var face = faceService.analyzeFace($scope.face);
+
 
         var leftEye = face.leftEye;
         var rightEye = face.rightEye;
@@ -73,7 +76,7 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
             delayTime: 6 * (rightEye.outerX - leftEye.outerX), //how many milliseconds should the wet signal be delayed?
             wetLevel: 0.3, //0 to 1+
             dryLevel: 1, //0 to 1+
-            cutoff: nose.area * 6, //cutoff frequency of the built in lowpass-filter. 20 to 22050
+            cutoff: 2000, //cutoff frequency of the built in lowpass-filter. 20 to 22050
             bypass: 0
         });
 
@@ -84,14 +87,27 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
             bypass: 0 //the value 1 starts the effect as bypassed, 0 or 1
         });
 
+
+        // 
+        // var filter = new tuna.Filter({
+        //     frequency: 440, //20 to 22050
+        //     Q: .1, //0.001 to 100
+        //     gain: 0, //-40 to 40
+        //     filterType: 'bandpass', //lowpass, highpass, bandpass, lowshelf, highshelf, peaking, notch, allpass
+        //     bypass: 0
+        // });
+
         // Signal flow chain: node --> effects --> output
         var chain = [output];
+        // chain.unshift(filter);
+
         chain.unshift(chorus);
         chain.unshift(delay);
 
         // Play a face
         $scope.play = function() {
 
+            console.log(overdrive);
             $scope.oscillators = [];
 
             // Create a series of eight notes based on facial qualities
