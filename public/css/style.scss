@@ -37,19 +37,23 @@ header {
         justify-content: space-around;
         font-size: 0.5em;
 
-        a {
-            border: 2px outset gray;
-            border-radius: 8px;
-            background-color: whitesmoke;
-            color: black;
-            text-decoration: none;
-            text-shadow: none;
-            padding: 5%;
-            margin: 1%;
-            white-space: nowrap;
+        div {
+          display: flex;
+          align-items: center;
+          margin: 1%;
+            a {
+              padding: 5%;
+                border: 2px outset gray;
+                border-radius: 8px;
+                background-color: whitesmoke;
+                color: black;
+                text-decoration: none;
+                text-shadow: none;
+                white-space: nowrap;
 
-            &:hover {
-                text-shadow: 0 2px 3px rgba(0, 0, 0, .7);
+                &:hover {
+                    text-shadow: 0 2px 3px rgba(0, 0, 0, .7);
+                }
             }
         }
     }
@@ -130,8 +134,6 @@ main {
         }
 
         &:hover {
-            // position: relative;
-            // top: -5px;
             cursor: pointer;
         }
     }

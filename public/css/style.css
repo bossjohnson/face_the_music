@@ -30,18 +30,21 @@ header {
     display: flex;
     justify-content: space-around;
     font-size: 0.5em; }
-    header nav a {
-      border: 2px outset gray;
-      border-radius: 8px;
-      background-color: whitesmoke;
-      color: black;
-      text-decoration: none;
-      text-shadow: none;
-      padding: 5%;
-      margin: 1%;
-      white-space: nowrap; }
-      header nav a:hover {
-        text-shadow: 0 2px 3px rgba(0, 0, 0, 0.7); }
+    header nav div {
+      display: flex;
+      align-items: center;
+      margin: 1%; }
+      header nav div a {
+        padding: 5%;
+        border: 2px outset gray;
+        border-radius: 8px;
+        background-color: whitesmoke;
+        color: black;
+        text-decoration: none;
+        text-shadow: none;
+        white-space: nowrap; }
+        header nav div a:hover {
+          text-shadow: 0 2px 3px rgba(0, 0, 0, 0.7); }
   header .ftmLogo {
     font-family: 'LD Music', sans-serif; }
 

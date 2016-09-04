@@ -3,12 +3,15 @@ app.controller('uploadCtrl', uploadCtrl);
 app.controller('dataFetchCtrl', dataFetchCtrl);
 app.controller('faceCtrl', faceCtrl);
 app.controller('synthCtrl', synthCtrl);
+app.controller('sequencerCtrl', sequencerCtrl);
+
 
 // Inject Dependencies
 uploadCtrl.$inject = ['$scope', '$http', 'Upload'];
 dataFetchCtrl.$inject = ['$scope', '$http', '$rootScope'];
 faceCtrl.$inject = ['$scope', '$timeout', '$http', '$rootScope', 'faceService'];
 synthCtrl.$inject = ['$rootScope'];
+// sequencerCtrl.$inject = [''];
 
 // Controller Functions
 function uploadCtrl($scope, $http, Upload) {
@@ -107,7 +110,7 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
         // Play a face
         $scope.play = function() {
 
-            console.log(overdrive);
+            // console.log(overdrive);
             $scope.oscillators = [];
 
             // Create a series of eight notes based on facial qualities
@@ -225,4 +228,8 @@ function keyFilter(freq) { // TODO: change function to pass in a key
         default:
             return keyA['root'];
     }
+}
+
+function sequencerCtrl () {
+  console.log('sequence controller active');
 }
