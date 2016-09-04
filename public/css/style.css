@@ -102,4 +102,17 @@ main {
 svg {
   position: absolute; }
 
+.faceSelect {
+  border: 2px solid black;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; }
+
+.seqImg {
+  height: 10vw;
+  width: 10vw;
+  border-radius: 50%;
+  object-fit: cover; }
+
 /*# sourceMappingURL=style.css.map */

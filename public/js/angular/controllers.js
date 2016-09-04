@@ -8,10 +8,10 @@ app.controller('sequencerCtrl', sequencerCtrl);
 
 // Inject Dependencies
 uploadCtrl.$inject = ['$scope', '$http', 'Upload'];
-dataFetchCtrl.$inject = ['$scope', '$http', '$rootScope'];
+dataFetchCtrl.$inject = ['$scope', '$http', '$rootScope', 'dataService'];
 faceCtrl.$inject = ['$scope', '$timeout', '$http', '$rootScope', 'faceService'];
 synthCtrl.$inject = ['$rootScope'];
-// sequencerCtrl.$inject = [''];
+sequencerCtrl.$inject = ['$scope'];
 
 // Controller Functions
 function uploadCtrl($scope, $http, Upload) {
@@ -30,9 +30,9 @@ function uploadCtrl($scope, $http, Upload) {
     }
 }
 
-function dataFetchCtrl($scope, $http, $rootScope) {
+function dataFetchCtrl($scope, $http, $rootScope, dataService) {
     $scope.view = {};
-    $http.get('/faces/all').then(function(data) {
+    dataService.getFaces().then(function(data) {
         $scope.view.faceIds = data.data;
     });
 
@@ -90,16 +90,6 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
             bypass: 0 //the value 1 starts the effect as bypassed, 0 or 1
         });
 
-
-        //
-        // var filter = new tuna.Filter({
-        //     frequency: 440, //20 to 22050
-        //     Q: .1, //0.001 to 100
-        //     gain: 0, //-40 to 40
-        //     filterType: 'bandpass', //lowpass, highpass, bandpass, lowshelf, highshelf, peaking, notch, allpass
-        //     bypass: 0
-        // });
-
         // Signal flow chain: node --> effects --> output
         var chain = [output];
         // chain.unshift(filter);
@@ -110,7 +100,6 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
         // Play a face
         $scope.play = function() {
 
-            // console.log(overdrive);
             $scope.oscillators = [];
 
             // Create a series of eight notes based on facial qualities
@@ -175,61 +164,6 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
 
 }
 
-var keyA = { // TODO: generate key frequencies dynamically
-    octD_Root: 220,
-    octD_M2: 246.94,
-    octD_M3: 277.18,
-    octD_P4: 293.66,
-    octD_P5: 329.63,
-    octD_M6: 369.99,
-    octD_M7: 415.30,
-    root: 440,
-    M2: 493.88,
-    M3: 554.37,
-    P4: 587.33,
-    P5: 659.25,
-    M6: 739.99,
-    M7: 830.61,
-    octUp: 880
-};
-
-function keyFilter(freq) { // TODO: change function to pass in a key
-    switch (true) {
-        case freq <= keyA['octD_Root']:
-            return keyA['octD_Root'];
-        case freq <= keyA['octD_M2']:
-            return keyA['octD_M2'];
-        case freq <= keyA['octD_M3']:
-            return keyA['octD_M3'];
-        case freq <= keyA['octD_P4']:
-            return keyA['octD_P4'];
-        case freq <= keyA['octD_P5']:
-            return keyA['octD_P5'];
-        case freq <= keyA['octD_M6']:
-            return keyA['octD_M6'];
-        case freq <= keyA['octD_M7']:
-            return keyA['octD_M7'];
-        case freq <= keyA['root']:
-            return keyA['root'];
-        case freq <= keyA['M2']:
-            return keyA['M2'];
-        case freq <= keyA['M3']:
-            return keyA['M3'];
-        case freq <= keyA['P4']:
-            return keyA['P4'];
-        case freq <= keyA['P5']:
-            return keyA['P5'];
-        case freq <= keyA['M6']:
-            return keyA['M6'];
-        case freq <= keyA['M7']:
-            return keyA['M7'];
-        case freq <= keyA['octUp']:
-            return keyA['octUp'];
-        default:
-            return keyA['root'];
-    }
-}
-
-function sequencerCtrl () {
-  console.log('sequence controller active');
+function sequencerCtrl($scope) {
+    console.log('good to go');
 }

@@ -14,7 +14,7 @@ app.config(function($routeProvider) {
         })
         .when('/sequencer', {
           templateUrl: 'partials/sequencer.html',
-          controller: 'sequencerCtrl'
+          controller: 'dataFetchCtrl'
         })
         .otherwise({
             redirectTo: '/'

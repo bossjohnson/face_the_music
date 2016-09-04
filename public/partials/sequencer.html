@@ -1,1 +1,8 @@
-<h1>Sequencer</h1>
+<section class="faceSelect">
+    <div ng-repeat="face in view.faceIds track by $index"
+        musical-face
+        face-id="face.id"
+        face-type="sequencer">
+    </div>
+</section>
+<section ng-controller="sequencerCtrl">Sequencer goes here</section>

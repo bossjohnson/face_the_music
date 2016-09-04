@@ -1,4 +1,6 @@
 app.service('faceService', faceService);
+app.service('dataService', dataService);
+dataService.$inject = ['$http']
 
 function faceService($rootScope) {
     this.getFacialAttributes = function(face) {
@@ -111,6 +113,12 @@ function faceService($rootScope) {
 }
 
 faceService.$inject = ['$rootScope'];
+
+function dataService ($http) {
+    this.getFaces = function () {
+        return $http.get('/faces/all');
+    }
+}
 
 function connect(node, chain) {
     if (!chain.length) return;
