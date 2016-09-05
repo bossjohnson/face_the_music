@@ -1,6 +1,6 @@
 <section class="faceSelect">
     <ul>
-        <li ng-repeat="face in view.faceIds track by $index"
+        <li ng-repeat="face in view.faceIds"
             class="faceListItem"
             musical-face
             face-id="face.id"
@@ -16,7 +16,8 @@
         <li ng-repeat="face in view.faces"
             musical-face
             face-id="face.id"
-            face-type="sequencer">
+            face-type="sequencer"
+            class="faceInSequencer">
         </li>
     </ol>
 </section>

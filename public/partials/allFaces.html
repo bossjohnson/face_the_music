@@ -1,12 +1,8 @@
-<button ng-click="$root.hideImages()">
-    <span ng-show="!$root.imagesHidden">Hide Images</span>
-    <span ng-show="$root.imagesHidden">Show Images</span>
-</button>
 <div class="faceContainer">
     <div musical-face
         face-id="face.id"
         face="face"
         face-type="showAll"
-        ng-repeat="face in view.faceIds track by $index">
+        ng-repeat="face in view.faceIds">
     </div>
 </div>

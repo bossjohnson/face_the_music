@@ -35,12 +35,6 @@ function dataFetchCtrl($scope, $http, $rootScope, dataService) {
     dataService.getFaces().then(function(data) {
         $scope.view.faceIds = data.data;
     });
-
-    $rootScope.imagesHidden = false;
-
-    $rootScope.hideImages = function() {
-        $rootScope.imagesHidden = !$rootScope.imagesHidden;
-    };
 }
 
 function synthCtrl($rootScope) {
