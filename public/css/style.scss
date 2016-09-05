@@ -162,15 +162,36 @@ svg {
 }
 
 .faceSelect {
+    padding: 1%;
+    position: relative;
     border: 5px outset gray;
     border-radius: 8px;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: nowrap;
     background-color: rgba(248, 248, 255, .8);
     box-shadow: 0 2px 2px rgba(0, 0, 0, .7);
-    overflow-x: scroll;
+
+    ul {
+        display: flex;
+        justify-content: space-between;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+
+    button {
+        font-size: 2em;
+        align-self: flex-start;
+        position: absolute;
+        left: 0;
+        top: 0;
+        border: none;
+        background-color: transparent;
+        z-index: 1;
+
+        &:hover {
+            cursor: pointer;
+        }
+        // margin: 1%;
+    }
 }
 
 .seqImg {
@@ -188,11 +209,46 @@ svg {
     border-radius: 8px;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     background-color: rgba(248, 248, 255, .8);
     box-shadow: 0 2px 2px rgba(0, 0, 0, .7);
+
+    .sequencerControls {
+        display: flex;
+        justify-content: space-between;
+        width: 15%;
+        border: 5px outset gray;
+        border-radius: 8px;
+        padding: 0.25% 1%;
+
+        .playButton,
+        .stopButton {
+            font-size: 2em;
+            border-radius: 8px;
+            margin: 0 2%;
+            flex-grow: 1;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .playButton {
+            background-color: green;
+            &:hover {
+              background-color: darkgreen;
+            }
+        }
+
+        .stopButton {
+            background-color: red;
+            &:hover {
+              background-color: darkred;
+            }
+        }
+    }
 
     .sequencerRow {
         padding: 1%;
@@ -201,6 +257,8 @@ svg {
         height: 62%;
         border: 5px outset gray;
         border-radius: 8px;
+        display: flex;
+        align-items: center;
     }
 }
 
@@ -249,5 +307,4 @@ img {
     top: 0;
     font-size: 2em;
     color: gray;
-    border: 1px dotted gray;
 }

@@ -4,7 +4,7 @@ app.controller('dataFetchCtrl', dataFetchCtrl);
 app.controller('faceCtrl', faceCtrl);
 app.controller('synthCtrl', synthCtrl);
 app.controller('sequencerCtrl', sequencerCtrl);
-
+app.controller('facePaletteCtrl', facePaletteCtrl);
 
 // Inject Dependencies
 uploadCtrl.$inject = ['$scope', '$http', 'Upload'];
@@ -12,6 +12,7 @@ dataFetchCtrl.$inject = ['$scope', '$http', '$rootScope', 'dataService'];
 faceCtrl.$inject = ['$scope', '$timeout', '$http', '$rootScope', 'faceService'];
 synthCtrl.$inject = ['$rootScope'];
 sequencerCtrl.$inject = ['$scope'];
+facePaletteCtrl.$inject = ['$scope'];
 
 // Controller Functions
 function uploadCtrl($scope, $http, Upload) {
@@ -45,7 +46,6 @@ function synthCtrl($rootScope) {
 function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
     $http.get('/faces/' + $scope.faceId).then(function(data) {
         $scope.face = data.data[0];
-        // console.log('$scope.face:', $scope.face);
 
         var faceAttrs = faceService.getFacialAttributes($scope.face);
         var face = faceService.analyzeFace($scope.face);
@@ -159,4 +159,13 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
 function sequencerCtrl($scope) {
     $scope.sequence = {};
     $scope.sequence.faces = [];
+}
+
+function facePaletteCtrl($scope) {
+    $scope.view = {};
+    $scope.view.showPalette = true;
+    $scope.showHide = function() {
+        // console.log($scope.view);
+        $scope.view.showPalette = !$scope.view.showPalette;
+    };
 }

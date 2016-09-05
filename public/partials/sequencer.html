@@ -1,4 +1,8 @@
 <section class="faceSelect">
+    <button>
+      <span class="fa fa-caret-square-o-up" ng-click="showHide()"></span>
+  </button>
+    <!-- <ul ng-show="view.showPalette"> -->
     <ul>
         <li ng-repeat="face in view.faceIds"
             class="faceListItem"
@@ -11,10 +15,12 @@
 </section>
 <section ng-controller="sequencerCtrl"
     class="sequencer">
+
     <ol dnd-list="sequence.faces"
         class="sequencerRow">
-        <p ng-if="!sequence.faces.length" class="dragHere">
-          Drag faces here
+        <p ng-if="!sequence.faces.length"
+            class="dragHere">
+            Drag faces here
         </p>
         <li ng-repeat="face in sequence.faces"
             musical-face
@@ -23,4 +29,14 @@
             class="faceInSequencer">
         </li>
     </ol>
+
+    <div class="sequencerControls">
+        <button class="playButton">
+        <span class="fa fa-play-circle"></span>
+      </button>
+        <button class="stopButton">
+        <span class="fa fa-stop-circle"></span>
+      </button>
+    </div>
+
 </section>
