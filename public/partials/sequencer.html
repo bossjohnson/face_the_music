@@ -1,8 +1,22 @@
 <section class="faceSelect">
-    <div ng-repeat="face in view.faceIds track by $index"
-        musical-face
-        face-id="face.id"
-        face-type="sequencer">
-    </div>
+    <ul>
+        <li ng-repeat="face in view.faceIds track by $index"
+            class="faceListItem"
+            musical-face
+            face-id="face.id"
+            face-type="sequencer"
+            dnd-draggable="face">
+        </li>
+    </ul>
 </section>
-<section ng-controller="sequencerCtrl">Sequencer goes here</section>
+<section ng-controller="sequencerCtrl"
+    class="sequencer">
+    <ol dnd-list="view.faces"
+        class="sequencerRow">
+        <li ng-repeat="face in view.faces"
+            musical-face
+            face-id="face.id"
+            face-type="sequencer">
+        </li>
+    </ol>
+</section>

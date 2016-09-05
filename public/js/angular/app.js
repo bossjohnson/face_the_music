@@ -1,4 +1,4 @@
-var app = angular.module('faceTheMusicApp', ['ngFileUpload', 'ngRoute']);
+var app = angular.module('faceTheMusicApp', ['ngFileUpload', 'ngRoute', 'dndLists']);
 app.config(function($routeProvider) {
     $routeProvider
         .when('/', {

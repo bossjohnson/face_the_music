@@ -40,7 +40,7 @@ function dataFetchCtrl($scope, $http, $rootScope, dataService) {
 
     $rootScope.hideImages = function() {
         $rootScope.imagesHidden = !$rootScope.imagesHidden;
-    }
+    };
 }
 
 function synthCtrl($rootScope) {
@@ -51,9 +51,9 @@ function synthCtrl($rootScope) {
 function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
     $http.get('/faces/' + $scope.faceId).then(function(data) {
         $scope.face = data.data[0];
+        // console.log('$scope.face:', $scope.face);
 
         var faceAttrs = faceService.getFacialAttributes($scope.face);
-        // console.log(faceAttrs);
         var face = faceService.analyzeFace($scope.face);
 
 
@@ -160,10 +160,9 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
             }, note.duration * 300);
         }
     });
-
-
 }
 
 function sequencerCtrl($scope) {
-    console.log('good to go');
+    $scope.view = {};
+    $scope.view.faces = [];
 }
