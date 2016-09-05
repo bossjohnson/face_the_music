@@ -123,9 +123,10 @@ svg {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   background-color: rgba(248, 248, 255, 0.8);
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.7); }
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.7);
+  overflow-x: scroll; }
 
 .seqImg {
   height: 10vw;
@@ -142,21 +143,21 @@ svg {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
   background-color: rgba(248, 248, 255, 0.8);
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.7); }
   .sequencer .sequencerRow {
+    padding: 1%;
     position: relative;
     width: 100%;
-    height: 50%;
-    border: 1px dotted gray; }
+    height: 62%;
+    border: 5px outset gray;
+    border-radius: 8px; }
 
 .faceListItem {
   position: relative;
   display: inline-block; }
-
-.dndDragging {
-  border-radius: 50%; }
 
 .dndDraggingSource {
   opacity: 0.5; }
@@ -172,6 +173,27 @@ svg {
   height: 10vw;
   width: 10vw;
   border-radius: 50%;
-  border: 2px solid black; }
+  border: 2px dashed rgba(0, 0, 0, 0.5); }
+
+img {
+  user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none; }
+
+.dragHere {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 2em;
+  color: gray;
+  border: 1px dotted gray; }
 
 /*# sourceMappingURL=style.css.map */

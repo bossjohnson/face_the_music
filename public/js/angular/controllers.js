@@ -157,6 +157,6 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
 }
 
 function sequencerCtrl($scope) {
-    $scope.view = {};
-    $scope.view.faces = [];
+    $scope.sequence = {};
+    $scope.sequence.faces = [];
 }

@@ -11,9 +11,12 @@
 </section>
 <section ng-controller="sequencerCtrl"
     class="sequencer">
-    <ol dnd-list="view.faces"
+    <ol dnd-list="sequence.faces"
         class="sequencerRow">
-        <li ng-repeat="face in view.faces"
+        <p ng-if="!sequence.faces.length" class="dragHere">
+          Drag faces here
+        </p>
+        <li ng-repeat="face in sequence.faces"
             musical-face
             face-id="face.id"
             face-type="sequencer"
