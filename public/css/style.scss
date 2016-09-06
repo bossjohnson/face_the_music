@@ -162,35 +162,48 @@ svg {
 }
 
 .faceSelect {
-    padding: 1%;
+    padding: 0 1%;
     position: relative;
     border: 5px outset gray;
     border-radius: 8px;
-    width: 100%;
+    width: 96%;
     background-color: rgba(248, 248, 255, .8);
     box-shadow: 0 2px 2px rgba(0, 0, 0, .7);
+
+    h2 {
+        text-align: center;
+    }
 
     ul {
         display: flex;
         justify-content: space-between;
         overflow-x: scroll;
         overflow-y: hidden;
+        transition: 0.25s ease;
+
+        &.expanded {
+            height: 10vw;
+        }
+
+        &.contracted {
+            height: 0;
+        }
     }
 
     button {
         font-size: 2em;
-        align-self: flex-start;
         position: absolute;
-        left: 0;
+        left: 1%;
         top: 0;
         border: none;
         background-color: transparent;
         z-index: 1;
+        display: flex;
+        align-items: flex-start;
 
         &:hover {
             cursor: pointer;
         }
-        // margin: 1%;
     }
 }
 
@@ -203,13 +216,14 @@ svg {
 
 .sequencer {
     margin: 1%;
-    width: 100%;
+    padding: 0 1%;
     height: 40vh;
+    width: 98%;
     border: 5px outset gray;
     border-radius: 8px;
-    width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
     background-color: rgba(248, 248, 255, .8);
@@ -237,24 +251,31 @@ svg {
 
         .playButton {
             background-color: green;
+
             &:hover {
-              background-color: darkgreen;
+                background-color: darkgreen;
             }
         }
 
         .stopButton {
             background-color: red;
+
             &:hover {
-              background-color: darkred;
+                background-color: darkred;
             }
         }
     }
 
-    .sequencerRow {
-        padding: 1%;
-        position: relative;
+    .headerRow {
         width: 100%;
-        height: 62%;
+        text-align: center;
+    }
+
+    .sequencerRow {
+        padding: 0.25% 1%;
+        position: relative;
+        width: 96%;
+        min-height: 30%;
         border: 5px outset gray;
         border-radius: 8px;
         display: flex;

@@ -114,8 +114,8 @@ function faceService($rootScope) {
 
 faceService.$inject = ['$rootScope'];
 
-function dataService ($http) {
-    this.getFaces = function () {
+function dataService($http) {
+    this.getFaces = function() {
         return $http.get('/faces/all');
     }
 }

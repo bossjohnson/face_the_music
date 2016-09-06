@@ -1,9 +1,16 @@
-<section class="faceSelect">
-    <button>
+<section class="faceSelect"
+    ng-controller="facePaletteCtrl">
+    <h2>Available Faces</h2>
+    <hr>
+
+    <button ng-show="!palette.show">
+      <span class="fa fa-caret-square-o-down" ng-click="showHide()"></span>
+    </button>
+    <button ng-show="palette.show">
       <span class="fa fa-caret-square-o-up" ng-click="showHide()"></span>
-  </button>
-    <!-- <ul ng-show="view.showPalette"> -->
-    <ul>
+    </button>
+
+    <ul ng-class="{expanded: palette.show, contracted: !palette.show}">
         <li ng-repeat="face in view.faceIds"
             class="faceListItem"
             musical-face
@@ -15,6 +22,11 @@
 </section>
 <section ng-controller="sequencerCtrl"
     class="sequencer">
+
+    <div class="headerRow">
+        <h2>Sequencer</h2>
+        <hr>
+    </div>
 
     <ol dnd-list="sequence.faces"
         class="sequencerRow">

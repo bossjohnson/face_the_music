@@ -162,10 +162,9 @@ function sequencerCtrl($scope) {
 }
 
 function facePaletteCtrl($scope) {
-    $scope.view = {};
-    $scope.view.showPalette = true;
+    $scope.palette = {};
+    $scope.palette.show = true;
     $scope.showHide = function() {
-        // console.log($scope.view);
-        $scope.view.showPalette = !$scope.view.showPalette;
+        $scope.palette.show = !$scope.palette.show;
     };
 }
