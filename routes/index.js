@@ -6,13 +6,10 @@ var multer = require('multer');
 var upload = multer({
     dest: 'uploads/'
 });
-// require('dotenv').config();
 var knexConfig = require('../knexfile')[process.env.NODE_ENV];
 var knex = require('knex')(knexConfig);
 var fs = require('fs');
 
-// Pull in environment variables
-require('dotenv').config(); // NOTE: delete or comment out for Heroku deploy
 
 // Configure cloudinary
 cloudinary.config({
