@@ -41,7 +41,8 @@
             face-type="sequencer"
             class="faceInSequencer"
             dnd-draggable="face"
-            dnd-moved="sequence.faces.splice($index, 1)">
+            dnd-moved="sequence.faces.splice($index, 1)"
+            dnd-canceled="sequence.faces.splice($index, 1)">
         </li>
     </ol>
 
