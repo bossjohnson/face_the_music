@@ -153,7 +153,14 @@ var keyA = { // TODO: generate key frequencies dynamically
     P5: 659.25,
     M6: 739.99,
     M7: 830.61,
-    octUp: 880
+    octUp: 880,
+    octUp_M2: 987.77,
+    octUp_M3: 1108.73,
+    octUp_P4: 1174.66,
+    octUp_P5: 1318.51,
+    octUp_M6: 1479.98,
+    octUp_M7: 1661.22,
+    octUp_octUp: 1760.00
 };
 
 function keyFilter(freq) { // TODO: change function to pass in a key
@@ -188,6 +195,20 @@ function keyFilter(freq) { // TODO: change function to pass in a key
             return keyA['M7'];
         case freq <= keyA['octUp']:
             return keyA['octUp'];
+        case freq <= keyA['octUp_M2']:
+            return keyA['octUp_M2'];
+        case freq <= keyA['octUp_M3']:
+            return keyA['octUp_M3'];
+        case freq <= keyA['octUp_P4']:
+            return keyA['octUp_P4'];
+        case freq <= keyA['octUp_P5']:
+            return keyA['octUp_P5'];
+        case freq <= keyA['octUp_M6']:
+            return keyA['octUp_M6'];
+        case freq <= keyA['octUp_M7']:
+            return keyA['octUp_M7'];
+        case freq <= keyA['octUp_octUp']:
+            return keyA['octUp_octUp'];
         default:
             return keyA['root'];
     }

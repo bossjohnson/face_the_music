@@ -11,20 +11,7 @@ app.directive('musicalFace', function() {
     };
 });
 
-// app.directive('faceSequence', function() {
-//     return {
-//         restrict: 'A',
-//         controller: sequenceRowCtrl,
-//         link: sequenceLink
-//     };
-// });
-//
-//
-// function sequenceLink(scope, element, attrs) {
-//
-// }
-
-app.directive('playSequence', function() {
+app.directive('playSequence', function($timeout) {
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
@@ -32,7 +19,7 @@ app.directive('playSequence', function() {
                 var facesInSequence = document.querySelector('.sequencerRow').querySelectorAll('li');
                 angular.element(facesInSequence[0]).triggerHandler('click');
                 for (let i = 1; i < facesInSequence.length; i++) {
-                    setTimeout(function() {
+                    $timeout(function() {
                         angular.element(facesInSequence[i]).triggerHandler('click');
                     }, 300 * 8 * i);
                 }
@@ -43,13 +30,13 @@ app.directive('playSequence', function() {
                     transition: ((300 * 8) / 1000) * facesInSequence.length + 's linear'
                 });
 
-                setTimeout(function() {
+                $timeout(function() {
                     scrubBar.css({
                         left: 10 * facesInSequence.length + 'vw'
                     });
-                });
+                }, 10);
 
-                setTimeout(function() {
+                $timeout(function() {
                     scrubBar.remove();
                 }, 300 * 8 * facesInSequence.length);
 
@@ -57,7 +44,8 @@ app.directive('playSequence', function() {
             });
         }
     };
-});
+}).$inject = ['$timeout'];
+
 
 function faceLink(scope, element, attrs) {
     element.on('click', function() {
