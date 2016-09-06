@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./server.js",
-    "prestart": "node ./node_modules/knex/lib/bin/cli.js migrate:latest"
+    "start": "node ./server.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
