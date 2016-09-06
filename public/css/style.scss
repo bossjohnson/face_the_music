@@ -44,7 +44,7 @@ header {
     font-size: 2em;
     border-bottom: 2px outset whitesmoke;
     margin-bottom: 1vh;
-    background-image: linear-gradient(170deg, rgba(220, 220, 220, .8), rgba(112, 128, 144, .8));
+    background-image: linear-gradient(170deg, rgba(220, 220, 220, .9), rgba(112, 128, 144, .9));
     text-shadow: 0 5px 6px rgba(0, 0, 0, .7);
 
     nav {
@@ -92,7 +92,7 @@ main {
     flex-direction: column;
     justify-content: space-between;
     padding: 1%;
-    background-color: rgba(248, 248, 255, .8);
+    background-color: rgba(248, 248, 255, .9);
     box-shadow: 0 2px 2px rgba(0, 0, 0, .7);
 
     button {
@@ -167,7 +167,7 @@ svg {
     border: 5px outset gray;
     border-radius: 8px;
     width: 96%;
-    background-color: rgba(248, 248, 255, .8);
+    background-color: rgba(248, 248, 255, .9);
     box-shadow: 0 2px 2px rgba(0, 0, 0, .7);
 
     h2 {
@@ -205,6 +205,10 @@ svg {
             cursor: pointer;
         }
     }
+
+    .dndDraggingSource {
+        opacity: 0.5;
+    }
 }
 
 .seqImg {
@@ -226,7 +230,7 @@ svg {
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-    background-color: rgba(248, 248, 255, .8);
+    background-color: rgba(248, 248, 255, .9);
     box-shadow: 0 2px 2px rgba(0, 0, 0, .7);
 
     .sequencerControls {
@@ -264,6 +268,10 @@ svg {
                 background-color: darkred;
             }
         }
+    }
+
+    .dndDraggingSource {
+        display: none;
     }
 
     .headerRow {

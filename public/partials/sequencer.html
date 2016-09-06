@@ -20,6 +20,7 @@
         </li>
     </ul>
 </section>
+
 <section ng-controller="sequencerCtrl"
     class="sequencer">
 
@@ -38,7 +39,9 @@
             musical-face
             face-id="face.id"
             face-type="sequencer"
-            class="faceInSequencer">
+            class="faceInSequencer"
+            dnd-draggable="face"
+            dnd-moved="sequence.faces.splice($index, 1)">
         </li>
     </ol>
 
