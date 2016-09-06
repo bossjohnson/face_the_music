@@ -1,5 +1,3 @@
-// Update with your config settings.
-
 module.exports = {
 
     development: {
@@ -9,13 +7,7 @@ module.exports = {
 
     production: {
         client: 'pg',
-        connection: {
-            database: process.env.RDS_DB_NAME
-            user: process.env.RDS_USERNAME,
-            password: process.env.RDS_PASSWORD,
-            host: process.env.RDS_HOSTNAME,
-            port: process.env.RDS_PORT
-        }
+        connection: process.env.DATABASE_URL
     }
 
 };
