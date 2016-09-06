@@ -22,12 +22,14 @@ function uploadCtrl($scope, $http, Upload) {
 
     $scope.uploadPhoto = function(photo) {
         delete $scope.upload.error;
+        $scope.upload.inProgress = true;
         Upload.upload({
             url: '/upload',
             data: {
                 file: photo
             }
         }).then(function(data) {
+            $scope.upload.inProgress = false;
             if (data.data.faceData) {
                 $scope.upload.faceData = data.data.faceData;
                 $scope.upload.url = data.data.faceUrl;

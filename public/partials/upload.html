@@ -7,7 +7,13 @@
         name="uploadPhoto"
         ng-click="uploadPhoto(upload.file)">Upload Photo</button>
 </form>
-<h1 class="error" ng-if="upload.error">{{ upload.error }}</h1>
+<div class="loading" ng-if="upload.inProgress">
+    <span>Uploading...</span>
+    <span class="fa fa-cog fa-lg"></span>
+</div>
+<h1 class="error"
+    ng-if="upload.error">{{ upload.error }}</h1>
+
 <img ng-src="{{ upload.url }}"
     class="previewImg"
     alt="FACE"
