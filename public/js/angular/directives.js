@@ -11,18 +11,18 @@ app.directive('musicalFace', function() {
     };
 });
 
-app.directive('faceSequence', function() {
-    return {
-        restrict: 'A',
-        controller: sequenceRowCtrl,
-        link: sequenceLink
-    };
-});
-
-
-function sequenceLink(scope, element, attrs) {
-
-}
+// app.directive('faceSequence', function() {
+//     return {
+//         restrict: 'A',
+//         controller: sequenceRowCtrl,
+//         link: sequenceLink
+//     };
+// });
+//
+//
+// function sequenceLink(scope, element, attrs) {
+//
+// }
 
 app.directive('playSequence', function() {
     return {
@@ -33,11 +33,27 @@ app.directive('playSequence', function() {
                 angular.element(facesInSequence[0]).triggerHandler('click');
                 for (let i = 1; i < facesInSequence.length; i++) {
                     setTimeout(function() {
-                        console.log('playing face', i);
                         angular.element(facesInSequence[i]).triggerHandler('click');
                     }, 300 * 8 * i);
-
                 }
+
+                var scrubBar = angular.element('<div/>');
+                scrubBar.addClass('scrubBar');
+                scrubBar.css({
+                    transition: ((300 * 8) / 1000) * facesInSequence.length + 's linear'
+                });
+
+                setTimeout(function() {
+                    scrubBar.css({
+                        left: 10 * facesInSequence.length + 'vw'
+                    });
+                });
+
+                setTimeout(function() {
+                    scrubBar.remove();
+                }, 300 * 8 * facesInSequence.length);
+
+                angular.element(document.querySelector('.sequencerRow')).prepend(scrubBar);
             });
         }
     };

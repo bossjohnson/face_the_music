@@ -280,7 +280,7 @@ svg {
     }
 
     .sequencerRow {
-        padding: 0.25% 1%;
+        padding: 0.25% 0;
         position: relative;
         width: 96%;
         min-height: 30%;
@@ -336,4 +336,20 @@ img {
     top: 0;
     font-size: 2em;
     color: gray;
+}
+
+.scrubBar {
+    width: 0.5vw;
+    height: 100%;
+    background-color: green;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.goToEndOfSequence {
+    left: 100px;
+    border: 2px solid black;
 }
