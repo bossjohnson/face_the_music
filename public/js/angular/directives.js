@@ -7,11 +7,46 @@ app.directive('musicalFace', function() {
             faceType: '@'
         },
         controller: faceCtrl,
-        link: drawFaces
+        link: faceLink
     };
 });
 
-function drawFaces(scope, element, attrs) {
+app.directive('faceSequence', function() {
+    return {
+        restrict: 'A',
+        controller: sequenceRowCtrl,
+        link: sequenceLink
+    };
+});
+
+
+function sequenceLink(scope, element, attrs) {
+
+}
+
+app.directive('playSequence', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.on('click', function() {
+                var facesInSequence = document.querySelector('.sequencerRow').querySelectorAll('li');
+                angular.element(facesInSequence[0]).triggerHandler('click');
+                for (let i = 1; i < facesInSequence.length; i++) {
+                    setTimeout(function() {
+                        console.log('playing face', i);
+                        angular.element(facesInSequence[i]).triggerHandler('click');
+                    }, 300 * 8 * i);
+
+                }
+            });
+        }
+    };
+});
+
+function faceLink(scope, element, attrs) {
+    element.on('click', function() {
+        scope.play();
+    });
     // console.log(scope);
     // setTimeout(function() {
     //

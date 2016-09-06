@@ -5,6 +5,7 @@ app.controller('faceCtrl', faceCtrl);
 app.controller('synthCtrl', synthCtrl);
 app.controller('sequencerCtrl', sequencerCtrl);
 app.controller('facePaletteCtrl', facePaletteCtrl);
+app.controller('sequenceRowCtrl', sequenceRowCtrl);
 
 // Inject Dependencies
 uploadCtrl.$inject = ['$scope', '$http', 'Upload'];
@@ -13,6 +14,7 @@ faceCtrl.$inject = ['$scope', '$timeout', '$http', '$rootScope', 'faceService'];
 synthCtrl.$inject = ['$rootScope'];
 sequencerCtrl.$inject = ['$scope'];
 facePaletteCtrl.$inject = ['$scope'];
+sequenceRowCtrl.$inject = ['$scope'];
 
 // Controller Functions
 function uploadCtrl($scope, $http, Upload) {
@@ -49,7 +51,6 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
 
         var faceAttrs = faceService.getFacialAttributes($scope.face);
         var face = faceService.analyzeFace($scope.face);
-
 
         var leftEye = face.leftEye;
         var rightEye = face.rightEye;
@@ -159,6 +160,14 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
 function sequencerCtrl($scope) {
     $scope.sequence = {};
     $scope.sequence.faces = [];
+
+    $scope.playSequence = function() {
+        // console.log($scope.sequence.faces);
+    };
+
+    $scope.stopSequence = function() {
+        console.log('stopping');
+    };
 }
 
 function facePaletteCtrl($scope) {
@@ -167,4 +176,9 @@ function facePaletteCtrl($scope) {
     $scope.showHide = function() {
         $scope.palette.show = !$scope.palette.show;
     };
+}
+
+function sequenceRowCtrl($scope) {
+    $scope.faces = [];
+
 }

@@ -30,7 +30,8 @@
     </div>
 
     <ol dnd-list="sequence.faces"
-        class="sequencerRow">
+        class="sequencerRow"
+        face-sequence>
         <p ng-if="!sequence.faces.length"
             class="dragHere">
             Drag faces here
@@ -47,10 +48,13 @@
     </ol>
 
     <div class="sequencerControls">
-        <button class="playButton">
+        <button class="playButton"
+            ng-click="playSequence()"
+            play-sequence>
         <span class="fa fa-play-circle"></span>
-      </button>
-        <button class="stopButton">
+        </button>
+        <button class="stopButton"
+            ng-click="stopSequence()">
         <span class="fa fa-stop-circle"></span>
       </button>
     </div>
