@@ -6,6 +6,8 @@ var multer = require('multer');
 var upload = multer({
     dest: 'uploads/'
 });
+// Pull in environment variables
+require('dotenv').config(); // NOTE: delete or comment out for Heroku deploy
 var knexConfig = require('../knexfile')[process.env.NODE_ENV];
 var knex = require('knex')(knexConfig);
 var fs = require('fs');
