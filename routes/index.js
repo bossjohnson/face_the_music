@@ -51,15 +51,17 @@ router.post('/upload', upload.single('file'), function(req, res, next) {
             });
             response.on('end', function() {
                 var faceData = JSON.parse(finished)[0];
+                if (!faceData) {
+                  console.log('NO FACE DETECTED');
+                  res.send('no face detected');
+                  return;
+                }
+
                 res.send({
                     faceUrl: faceUrl,
                     faceData: faceData
                 });
 
-                if (!faceData) {
-                    console.log('NO FACE DETECTED');
-                    return;
-                }
                 knex('faces')
                     .insert({
                         url: faceUrl,

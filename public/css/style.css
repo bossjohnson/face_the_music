@@ -265,4 +265,12 @@ img {
   left: 100px;
   border: 2px solid black; }
 
+.error {
+  margin: 5%;
+  color: red;
+  border: 5px outset gray;
+  border-radius: 8px;
+  padding: 5%;
+  background-color: rgba(248, 248, 255, 0.9); }
+
 /*# sourceMappingURL=style.css.map */

@@ -7,8 +7,8 @@
         name="uploadPhoto"
         ng-click="uploadPhoto(upload.file)">Upload Photo</button>
 </form>
+<h1 class="error" ng-if="upload.error">{{ upload.error }}</h1>
 <img ng-src="{{ upload.url }}"
     class="previewImg"
     alt="FACE"
     ng-if="upload.url">
-  

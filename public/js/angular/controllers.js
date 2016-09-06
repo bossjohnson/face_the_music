@@ -21,14 +21,19 @@ function uploadCtrl($scope, $http, Upload) {
     $scope.upload = {};
 
     $scope.uploadPhoto = function(photo) {
+        delete $scope.upload.error;
         Upload.upload({
             url: '/upload',
             data: {
                 file: photo
             }
         }).then(function(data) {
-            $scope.upload.faceData = data.data.faceData;
-            $scope.upload.url = data.data.faceUrl;
+            if (data.data.faceData) {
+                $scope.upload.faceData = data.data.faceData;
+                $scope.upload.url = data.data.faceUrl;
+            } else {
+                $scope.upload.error = 'Sorry, we couldn\'t detect a face!  Please try another photo.'
+            }
         });
     }
 }
