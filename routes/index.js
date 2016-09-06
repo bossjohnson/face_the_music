@@ -32,7 +32,7 @@ router.post('/upload', upload.single('file'), function(req, res, next) {
         // hit face api with data from cloudinary upload
         var hostName = 'api.projectoxford.ai';
         var queryParams = '?returnFaceId=false&returnFaceLandmarks=true&returnFaceAttributes=age,gender,facialHair,glasses,smile';
-        var faceUrl = result.url;
+        var faceUrl = result.url.replace('http', 'https');
 
         var options = {
             hostname: hostName,
