@@ -12,7 +12,7 @@ uploadCtrl.$inject = ['$scope', '$http', 'Upload'];
 dataFetchCtrl.$inject = ['$scope', '$http', '$rootScope', 'dataService'];
 faceCtrl.$inject = ['$scope', '$timeout', '$http', '$rootScope', 'faceService'];
 synthCtrl.$inject = ['$rootScope'];
-sequencerCtrl.$inject = ['$scope'];
+sequencerCtrl.$inject = ['$scope', '$rootScope'];
 facePaletteCtrl.$inject = ['$scope'];
 sequenceRowCtrl.$inject = ['$scope'];
 
@@ -54,6 +54,7 @@ function synthCtrl($rootScope) {
 
 function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
     $http.get('/faces/' + $scope.faceId).then(function(data) {
+        $scope.canPlay = true;
         $scope.face = data.data[0];
 
         var faceAttrs = faceService.getFacialAttributes($scope.face);
@@ -98,6 +99,14 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
 
         chain.unshift(chorus);
         chain.unshift(delay);
+
+        $scope.stop = function() {
+            if ($scope.oscillators) {
+                for (var i = 0; i < $scope.oscillators.length; i++) {
+                    $scope.oscillators[i].stop();
+                }
+            }
+        };
 
         // Play a face
         $scope.play = function() {
@@ -163,17 +172,14 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
     });
 }
 
-function sequencerCtrl($scope) {
+function sequencerCtrl($scope, $rootScope) {
     $scope.sequence = {};
     $scope.sequence.faces = [];
 
-    $scope.playSequence = function() {
-        // console.log($scope.sequence.faces);
-    };
-
-    $scope.stopSequence = function() {
-        console.log('stopping');
-    };
+    // $scope.stopSequence = function() {
+    //     console.log('stopping');
+    //     console.log($scope);
+    // };
 }
 
 function facePaletteCtrl($scope) {

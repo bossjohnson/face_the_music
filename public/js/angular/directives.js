@@ -19,6 +19,7 @@ app.directive('playSequence', function($timeout) {
                 var facesInSequence = document.querySelector('.sequencerRow').querySelectorAll('li');
                 angular.element(facesInSequence[0]).triggerHandler('click');
                 for (let i = 1; i < facesInSequence.length; i++) {
+                    angular.element(facesInSequence[i]).triggerHandler('reset');
                     $timeout(function() {
                         angular.element(facesInSequence[i]).triggerHandler('click');
                     }, 300 * 8 * i);
@@ -42,14 +43,40 @@ app.directive('playSequence', function($timeout) {
 
                 angular.element(document.querySelector('.sequencerRow')).prepend(scrubBar);
             });
+
         }
     };
 }).$inject = ['$timeout'];
 
+app.directive('stopSequence', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.on('click', function() {
+                var scrubBar = document.querySelector('.scrubBar');
+                angular.element(scrubBar).remove();
+                var facesInSequence = document.querySelector('.sequencerRow').querySelectorAll('li');
+                for (var i = 0; i < facesInSequence.length; i++) {
+                    angular.element(facesInSequence[i]).triggerHandler('pause');
+                }
+            });
+        }
+    };
+});
+
 
 function faceLink(scope, element, attrs) {
     element.on('click', function() {
-        scope.play();
+        if (scope.canPlay) {
+            scope.play();
+        }
+    });
+    element.on('pause', function() {
+        scope.canPlay = false;
+        scope.stop();
+    });
+    element.on('reset', function() {
+        scope.canPlay = true;
     });
     // console.log(scope);
     // setTimeout(function() {
