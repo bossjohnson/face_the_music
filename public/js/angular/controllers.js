@@ -115,11 +115,11 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
 
             // Create a series of eight notes based on facial qualities
             // Left Eye Width
-            var osc = faceService.makeTone((leftEye.innerX - leftEye.outerX) / 2 - (nose.area / 125), chain);
+            var osc = faceService.makeTone((leftEye.innerX - leftEye.outerX) / 2 - (nose.area / 50), chain);
             $scope.oscillators.push(osc);
 
             // Left Eye Height
-            osc = faceService.makeTone((leftEye.bottomY - leftEye.topY) / 2 + (nose.area / 125), chain);
+            osc = faceService.makeTone((leftEye.bottomY - leftEye.topY) / 2 + (nose.area / 50), chain);
             $scope.oscillators.push(osc);
 
             // Right Eye Width
@@ -135,11 +135,11 @@ function faceCtrl($scope, $timeout, $http, $rootScope, faceService) {
             $scope.oscillators.push(osc);
 
             // Mouth Height
-            osc = faceService.makeTone((mouth.underLipBottomY - mouth.underLipTopY) / 2, chain);
+            osc = faceService.makeTone((mouth.underLipBottomY - mouth.underLipTopY) / 3, chain);
             $scope.oscillators.push(osc);
 
             // Nose Width
-            osc = faceService.makeTone((nose.rightAlarOutTipX - nose.leftAlarOutTipX) / 2, chain);
+            osc = faceService.makeTone((nose.rightAlarOutTipX - nose.leftAlarOutTipX) / 4, chain);
             $scope.oscillators.push(osc);
 
             // Nose Height
