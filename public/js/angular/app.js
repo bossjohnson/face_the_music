@@ -1,9 +1,6 @@
 var app = angular.module('faceTheMusicApp', ['ngFileUpload', 'ngRoute', 'dndLists']);
 app.config(function($routeProvider) {
     $routeProvider
-        .when('/', {
-          templateUrl: 'partials/home.html'
-        })
         .when('/upload', {
             templateUrl: 'partials/upload.html',
             controller: 'uploadCtrl'
@@ -13,10 +10,10 @@ app.config(function($routeProvider) {
             controller: 'dataFetchCtrl'
         })
         .when('/sequencer', {
-          templateUrl: 'partials/sequencer.html',
-          controller: 'dataFetchCtrl'
+            templateUrl: 'partials/sequencer.html',
+            controller: 'dataFetchCtrl'
         })
         .otherwise({
-            redirectTo: '/'
+            redirectTo: '/faces'
         });
 });
